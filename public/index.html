@@ -1,0 +1,3158 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Guida NASpI 2026 - Assistente Ufficiale Disoccupazione INPS</title>
+  
+  <!-- SEO & Social Meta Tags -->
+  <meta name="description" content="Web app per calcolo NASpI, simulazione requisiti, stima importi e durata, guida passo-passo alla domanda sul portale INPS e checklist documenti aggiornata alle fonti INPS 2026.">
+  <meta name="keywords" content="NASpI 2026, calcolo NASpI, domanda disoccupazione INPS, requisiti NASpI, importo disoccupazione, décalage 3%, over 55 NASpI, circolari inps 2026, SPID CIE inps, documenti naspi">
+  <meta name="author" content="NASpiFacile">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://ais-pre-6jtrc3cktxcsqhkrk52hea-15228359218.europe-west1.run.app">
+  <meta name="theme-color" content="#131a15">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Guida NASpI 2026 - Assistente Ufficiale Disoccupazione INPS">
+  <meta property="og:description" content="Simulatore requisiti, calcolo durata e importi con décalage, guida passo-passo portale www.inps.it e checklist documenti.">
+  <meta property="og:locale" content="it_IT">
+
+  <!-- Schema.org JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "Guida NASpI",
+        "applicationCategory": "FinanceApplication",
+        "operatingSystem": "All modern browsers (Desktop PC, Mac, Tablet, Mobile)",
+        "description": "Assistente interattivo per la simulazione e compilazione della domanda di disoccupazione NASpI.",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR" }
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Quali sono i requisiti minimi per avere diritto alla NASpI?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Disoccupazione involontaria (licenziamento, scadenza contratto a termine, dimissioni per giusta causa o maternità) e almeno 13 settimane di contribuzione nei 4 anni precedenti."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Come si calcola l'importo della NASpI nel 2026?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "75% della retribuzione media mensile fino a 1.456,72 € + 25% della differenza per la quota eccedente, con tetto massimo di 1.584,70 € lordi mensili per il 2026."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    :root {
+      --bg: #C7D5CC;
+      --card-bg: #E7EFEA;
+      --card-white: #FFFFFF;
+      --surface: #D8E4DC;
+      --border: #38463E;
+      --border-light: #A4B7AB;
+      --text-main: #131A15;
+      --text-muted: #38463E;
+      --white: #FFFFFF;
+      --accent-green: #2B7A4B;
+      --accent-error: #9E2A2B;
+      --accent-warning: #B35C00;
+      --bg-color: #E7EFEA;
+      --border-color: #38463E;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text-main);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      line-height: 1.5;
+      padding: 24px 16px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      background: var(--bg);
+    }
+
+    /* Header Nav & Badge */
+    .top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      border-bottom: 1.5px solid var(--text-main);
+      padding-bottom: 12px;
+    }
+
+    .app-brand {
+      font-size: 1.25rem;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      color: var(--text-main);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .app-brand-badge {
+      background: var(--text-main);
+      color: var(--white);
+      font-size: 0.65rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      padding: 3px 6px;
+      border-radius: 3px;
+      letter-spacing: 0.6px;
+    }
+
+    .header-actions {
+      display: flex;
+      gap: 10px;
+    }
+
+    .btn-nav-text {
+      background: transparent;
+      border: 1px solid var(--border);
+      padding: 6px 12px;
+      border-radius: 4px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--text-main);
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .btn-nav-text:hover {
+      background: var(--text-main);
+      color: var(--white);
+    }
+
+    .btn-lang-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--card-bg);
+      border: 1.5px solid var(--border);
+      padding: 5px 10px;
+      border-radius: 4px;
+      font-size: 0.8rem;
+      font-weight: 800;
+      color: var(--text-main);
+      cursor: pointer;
+      letter-spacing: 0.6px;
+      transition: all 0.15s ease;
+      font-family: inherit;
+    }
+
+    .btn-lang-toggle:hover {
+      background: var(--text-main);
+      color: var(--white);
+    }
+
+    .btn-lang-toggle .globe-icon {
+      stroke: currentColor;
+      flex-shrink: 0;
+    }
+
+    /* Views */
+    .view-page {
+      display: none;
+    }
+
+    .view-page.active {
+      display: block;
+      animation: fadeIn 0.2s ease-in;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Headings */
+    h1 {
+      font-size: 2.2rem;
+      line-height: 1.15;
+      font-weight: 800;
+      letter-spacing: -0.8px;
+      margin-bottom: 8px;
+    }
+
+    .subtitle {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      margin-bottom: 14px;
+    }
+
+    .source-citation {
+      display: flex;
+      align-items: center;
+      margin-bottom: 24px;
+    }
+
+    .source-bar {
+      width: 3px;
+      height: 28px;
+      background-color: var(--text-main);
+      margin-right: 12px;
+      flex-shrink: 0;
+    }
+
+    .source-text {
+      font-size: 0.85rem;
+      font-style: italic;
+      color: var(--text-muted);
+    }
+
+    /* Hero Banner 68 Giorni */
+    .hero-banner {
+      background: var(--text-main);
+      color: var(--white);
+      padding: 16px 20px;
+      border-radius: 6px;
+      margin-bottom: 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .hero-banner h2 {
+      font-size: 1.05rem;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      margin-bottom: 4px;
+      color: #FFFFFF;
+    }
+
+    .hero-banner p {
+      font-size: 0.85rem;
+      color: #D8E4DC;
+    }
+
+    .hero-pill {
+      background: #FFFFFF;
+      color: var(--text-main);
+      font-size: 0.75rem;
+      font-weight: 800;
+      padding: 4px 8px;
+      border-radius: 4px;
+      white-space: nowrap;
+    }
+
+    /* 4 Primary Buttons Grid */
+    .main-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+
+    @media (max-width: 650px) {
+      .main-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .feature-card {
+      background: var(--card-bg);
+      border: 1.5px solid var(--text-main);
+      border-radius: 6px;
+      padding: 20px;
+      cursor: pointer;
+      transition: transform 0.15s ease, background 0.15s ease, box-shadow 0.15s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      text-align: left;
+    }
+
+    .feature-card:hover {
+      background: #DEE9E1;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(19, 26, 21, 0.08);
+    }
+
+    .feature-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 14px;
+    }
+
+    .feature-card-icon-box {
+      width: 42px;
+      height: 42px;
+      background: var(--text-main);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .feature-card-icon-box svg {
+      width: 22px;
+      height: 22px;
+      fill: #ffffff;
+    }
+
+    .feature-card-badge {
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--text-main);
+      background: var(--surface);
+      border: 1px solid var(--text-main);
+      padding: 3px 8px;
+      border-radius: 4px;
+      letter-spacing: 0.2px;
+    }
+
+    .feature-card h3 {
+      font-size: 1.2rem;
+      font-weight: 800;
+      margin-bottom: 6px;
+      line-height: 1.2;
+    }
+
+    .feature-card p {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      line-height: 1.45;
+      margin-bottom: 14px;
+      flex-grow: 1;
+    }
+
+    .feature-card-action {
+      font-size: 0.85rem;
+      font-weight: 800;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    /* Disclaimer box */
+    .disclaimer-box {
+      background: var(--surface);
+      border: 1.2px solid var(--border);
+      border-radius: 6px;
+      padding: 18px;
+      margin: 24px 0;
+      font-size: 0.88rem;
+    }
+
+    .disclaimer-box h3 {
+      font-size: 0.95rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .disclaimer-box ul {
+      margin-left: 20px;
+      margin-top: 6px;
+      margin-bottom: 6px;
+    }
+
+    .disclaimer-box li {
+      margin-bottom: 4px;
+    }
+
+    /* Form & UI Elements */
+    .form-group {
+      margin-bottom: 18px;
+    }
+
+    label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 6px;
+    }
+
+    .input-text, select {
+      width: 100%;
+      padding: 10px 12px;
+      font-size: 1rem;
+      border: 1.2px solid var(--border);
+      border-radius: 4px;
+      background: var(--white);
+      color: var(--text-main);
+      font-family: inherit;
+    }
+
+    .input-text:focus, select:focus {
+      outline: 2px solid var(--text-main);
+    }
+
+    .slider-container {
+      margin: 10px 0;
+    }
+
+    .slider {
+      width: 100%;
+      height: 6px;
+      border-radius: 3px;
+      background: var(--border-light);
+      outline: none;
+      -webkit-appearance: none;
+    }
+
+    .slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--text-main);
+      cursor: pointer;
+    }
+
+    .slider-value-display {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.85rem;
+      font-weight: 700;
+      margin-top: 4px;
+    }
+
+    .checkbox-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 8px 0;
+      cursor: pointer;
+    }
+
+    .checkbox-row input {
+      margin-top: 3px;
+      width: 18px;
+      height: 18px;
+      cursor: pointer;
+    }
+
+    .button-primary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--text-main);
+      color: var(--white);
+      padding: 12px 24px;
+      border-radius: 4px;
+      font-size: 0.95rem;
+      font-weight: 800;
+      border: 1.5px solid var(--text-main);
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.15s ease;
+      width: 100%;
+    }
+
+    .button-primary:hover {
+      background: #25332A;
+    }
+
+    .button-secondary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: transparent;
+      color: var(--text-main);
+      padding: 10px 18px;
+      border-radius: 4px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      border: 1.2px solid var(--text-main);
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .button-secondary:hover {
+      background: var(--surface);
+    }
+
+    /* Result Panel */
+    .result-box {
+      background: var(--card-bg);
+      border: 1.5px solid var(--text-main);
+      border-radius: 6px;
+      padding: 20px;
+      margin-top: 20px;
+    }
+
+    .badge-eligible {
+      background: var(--accent-green);
+      color: var(--white);
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 4px;
+      font-weight: 800;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+    }
+
+    .badge-not-eligible {
+      background: var(--accent-error);
+      color: var(--white);
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 4px;
+      font-weight: 800;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+    }
+
+    .result-stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 12px;
+      margin: 16px 0;
+    }
+
+    .stat-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 12px;
+    }
+
+    .stat-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: var(--text-muted);
+    }
+
+    .stat-value {
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: var(--text-main);
+      margin-top: 2px;
+    }
+
+    /* Schedule Table */
+    .table-container {
+      overflow-x: auto;
+      margin-top: 16px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.85rem;
+      background: var(--white);
+      border: 1px solid var(--border);
+    }
+
+    th, td {
+      padding: 8px 12px;
+      text-align: left;
+      border-bottom: 1px solid var(--border-light);
+    }
+
+    th {
+      background: var(--surface);
+      font-weight: 800;
+      text-transform: uppercase;
+      font-size: 0.75rem;
+      letter-spacing: 0.5px;
+    }
+
+    /* Step guide */
+    .step-card {
+      background: var(--card-bg);
+      border: 1.2px solid var(--text-main);
+      border-radius: 6px;
+      margin-bottom: 14px;
+      padding: 16px;
+    }
+
+    .step-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+
+    .step-pill {
+      background: var(--text-main);
+      color: var(--white);
+      font-size: 0.75rem;
+      font-weight: 800;
+      padding: 3px 8px;
+      border-radius: 4px;
+    }
+
+    .step-title {
+      font-size: 1.1rem;
+      font-weight: 800;
+      margin-bottom: 6px;
+    }
+
+    .step-path {
+      background: var(--surface);
+      border-left: 3px solid var(--text-main);
+      padding: 6px 10px;
+      font-size: 0.8rem;
+      font-family: monospace;
+      margin: 10px 0;
+    }
+
+    .step-tips {
+      margin-left: 20px;
+      font-size: 0.85rem;
+      margin-bottom: 8px;
+    }
+
+    /* Checklist */
+    .filter-buttons {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+    }
+
+    .filter-btn {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 5px 12px;
+      border-radius: 4px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .filter-btn.active {
+      background: var(--text-main);
+      color: var(--white);
+    }
+
+    .doc-item {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 12px 16px;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .doc-item.checked {
+      background: #DEE9E1;
+      opacity: 0.85;
+    }
+
+    /* Accordion FAQ */
+    .faq-accordion {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      margin-bottom: 10px;
+      padding: 14px;
+      cursor: pointer;
+    }
+
+    .faq-question {
+      font-weight: 700;
+      font-size: 0.95rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .faq-answer {
+      display: none;
+      padding-top: 10px;
+      margin-top: 10px;
+      border-top: 1px solid var(--border-light);
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    .faq-accordion.open .faq-answer {
+      display: block;
+    }
+
+    /* Footer */
+    footer {
+      margin-top: 36px;
+      padding-top: 16px;
+      padding-bottom: 24px;
+      border-top: 1.5px solid var(--text-main);
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .footer-info-row {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .footer-creator-badge {
+      text-align: center;
+      padding-top: 10px;
+      border-top: 1px dashed var(--border-light);
+      font-size: 0.85rem;
+      font-weight: 400;
+      color: var(--text-muted);
+      letter-spacing: 0.4px;
+    }
+
+    .footer-policy-row {
+      text-align: center;
+      padding-top: 4px;
+    }
+
+    .footer-policy-btn {
+      background: none;
+      border: none;
+      color: var(--text-main);
+      font-family: inherit;
+      font-size: 0.82rem;
+      font-weight: 600;
+      text-decoration: underline;
+      cursor: pointer;
+      padding: 4px 10px;
+      border-radius: 4px;
+      transition: opacity 0.2s ease;
+    }
+
+    .footer-policy-btn:hover {
+      opacity: 0.75;
+    }
+
+    .initial-policy-box {
+      margin-bottom: 24px;
+    }
+
+    .initial-policy-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .initial-policy-close-btn {
+      background: rgba(43, 62, 54, 0.08);
+      border: 1px solid var(--border-light);
+      border-radius: 4px;
+      padding: 8px 16px;
+      font-size: 0.84rem;
+      font-weight: 700;
+      cursor: pointer;
+      color: var(--text-main);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+      line-height: 1.2;
+    }
+
+    .initial-policy-close-btn:hover {
+      background: var(--text-main);
+      color: var(--white);
+    }
+
+    .initial-policy-reopen-card {
+      background: var(--card-bg);
+      border: 1.5px solid var(--border);
+      border-radius: 6px;
+      padding: 14px 18px;
+      margin-bottom: 24px;
+      display: none;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .initial-policy-reopen-card:hover {
+      border-color: var(--text-main);
+      background: var(--white);
+    }
+
+    .minimal-icon-bw {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-main);
+      vertical-align: middle;
+      flex-shrink: 0;
+    }
+
+    /* Banner Fisso Non Sostituzione a Enti Professionali */
+    .fixed-disclaimer-banner {
+      background: var(--card-bg);
+      border: 1.5px solid var(--border-light);
+      border-radius: 6px;
+      padding: 14px 16px;
+      margin: 0 auto 18px auto;
+      max-width: 600px;
+      text-align: left;
+      box-sizing: border-box;
+    }
+
+    .fixed-disclaimer-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 6px;
+    }
+
+    .fixed-disclaimer-title {
+      font-size: 0.95rem;
+      font-weight: 800;
+      color: var(--text-main);
+    }
+
+    .fixed-disclaimer-sub {
+      font-size: 0.84rem;
+      color: var(--text-main);
+      margin-bottom: 8px;
+      line-height: 1.45;
+    }
+
+    .fixed-disclaimer-list {
+      margin: 0 0 0 16px;
+      padding: 0;
+      font-size: 0.82rem;
+      color: var(--text-main);
+      line-height: 1.55;
+    }
+
+    .fixed-disclaimer-list li {
+      margin-bottom: 3px;
+    }
+
+    /* PDF Download Card (Centered Layout) */
+    .pdf-download-card {
+      background: var(--card-bg);
+      border: 2px solid var(--text-main);
+      border-radius: 8px;
+      margin-bottom: 24px;
+      padding: 24px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      box-sizing: border-box;
+      width: 100%;
+    }
+
+    .pdf-download-card .pdf-badge-row {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+    }
+
+    .pdf-download-card h2 {
+      color: var(--text-main);
+      font-size: 1.35rem;
+      font-weight: 700;
+      margin: 0 0 10px 0;
+      text-align: center;
+      line-height: 1.35;
+    }
+
+    .pdf-download-card p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      line-height: 1.5;
+      max-width: 640px;
+      margin: 0 auto 18px auto;
+      text-align: center;
+    }
+
+    .pdf-download-card .button-primary {
+      text-decoration: none;
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 32px;
+      font-size: 0.98rem;
+      font-weight: 700;
+      border-radius: 6px;
+      min-width: 280px;
+      margin: 0 auto;
+      transition: background 0.2s ease, transform 0.1s ease;
+      cursor: pointer;
+    }
+
+    /* Stili Spazi Pubblicitari (AdMob / AdSense) */
+    .ad-banner-slot {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      padding: 10px 14px;
+      margin: 20px 0;
+      text-align: center;
+      box-sizing: border-box;
+      width: 100%;
+    }
+    .ad-banner-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      letter-spacing: 0.6px;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+    }
+    .ad-banner-content {
+      background: var(--bg-color);
+      border: 1px dashed var(--border-color);
+      border-radius: 4px;
+      min-height: 52px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      padding: 8px;
+    }
+
+    /* Modal Rewarded Video Ad */
+    .ad-modal-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(19, 26, 21, 0.85);
+      backdrop-filter: blur(4px);
+      z-index: 10000;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      box-sizing: border-box;
+    }
+    .ad-modal-overlay.active {
+      display: flex;
+    }
+    .ad-modal-box {
+      background-color: #E7EFEA !important;
+      background: #E7EFEA !important;
+      color: var(--text-main);
+      border: 2px solid var(--text-main);
+      border-radius: 10px;
+      max-width: 460px;
+      width: 100%;
+      padding: 24px;
+      box-shadow: 0 20px 48px rgba(0,0,0,0.55);
+      position: relative;
+      text-align: center;
+      box-sizing: border-box;
+      opacity: 1 !important;
+    }
+    .ad-modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 14px;
+    }
+    .ad-modal-close-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 1.25rem;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      padding: 4px;
+    }
+    .ad-video-mockup {
+      background: var(--text-main);
+      border-radius: 8px;
+      height: 150px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: var(--white);
+      margin: 16px 0;
+      position: relative;
+      overflow: hidden;
+    }
+    .ad-progress-bar-container {
+      width: 100%;
+      height: 6px;
+      background: var(--border-color);
+      border-radius: 3px;
+      overflow: hidden;
+      margin: 12px 0 16px 0;
+    }
+    .ad-progress-bar-fill {
+      height: 100%;
+      background: var(--text-main);
+      width: 0%;
+      transition: width 1s linear;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Top Navigation Bar -->
+    <header class="top-bar">
+      <a href="#" class="app-brand" onclick="navigateTo('view-main'); return false;" style="display:inline-flex; align-items:center; gap:10px; text-decoration:none;">
+        <img src="/naspifacile_logo.jpg" alt="NASpiFacile Logo" style="height:36px; width:36px; border-radius:6px; object-fit:cover; display:block; border:1px solid rgba(19,26,21,0.15);" />
+        <span id="app-brand-text" style="font-weight:800; font-size:1.15rem; color:var(--text-main); letter-spacing:-0.4px;">NASpiFacile</span>
+      </a>
+      <div class="header-actions">
+        <button class="btn-lang-toggle" id="btn-lang-toggle" onclick="toggleLanguage()" title="Traduci in Inglese / Translate to English">
+          <svg class="globe-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="2" y1="12" x2="22" y2="12"></line>
+            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+          </svg>
+          <span id="lang-code-label">EN</span>
+        </button>
+        <button class="btn-nav-text" id="nav-btn-menu" onclick="navigateTo('view-main')">Menu</button>
+        <button class="btn-nav-text" id="nav-btn-policy" onclick="openPolicyModal()">Informativa Legale</button>
+      </div>
+    </header>
+
+    <!-- ========================================== -->
+    <!-- PAGINA INIZIALE: ONBOARDING, PRIVACY & POLICY -->
+    <!-- ========================================== -->
+    <main id="view-initial" class="view-page active">
+      <h1>Assistente Domanda Disoccupazione NASpI</h1>
+      <p class="subtitle">Banca dati informativa e simulatore tecnico basato su fonti ufficiali INPS</p>
+
+      <div class="source-citation">
+        <div class="source-bar"></div>
+        <div class="source-text">
+          Fonti Ufficiali: Istituto Nazionale Previdenza Sociale (www.inps.it) • D.Lgs. 4 marzo 2015, n. 22 • Circolari Quadro n. 94/2015 e n. 142/2015 • Circolari e Messaggi di Rivalutazione Annuale Prestazioni a Sostegno del Reddito aggiornati al 2026
+        </div>
+      </div>
+
+      <div class="hero-banner">
+        <div>
+          <h2>TERMINE PERENTORIO: 68 GIORNI</h2>
+          <p>La domanda deve essere trasmessa all'INPS entro 68 giorni dalla data di cessazione a pena di decadenza.</p>
+        </div>
+        <span class="hero-pill">Art. 6 D.Lgs. 22/2015</span>
+      </div>
+
+      <div class="disclaimer-box" style="margin-bottom: 20px; border-left: 4px solid var(--text-main); background: var(--card-bg);">
+        <div style="font-weight: 700; margin-bottom: 4px; display: flex; align-items: center; gap: 6px;">
+          <span class="minimal-icon-bw">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="12" cy="13" r="8"></circle>
+              <path d="M12 9v4l2.5 2.5"></path>
+              <path d="M10 2h4"></path>
+              <path d="M12 2v3"></path>
+            </svg>
+          </span>
+          <span class="decorrenza-header-text">Decorrenza del pagamento (Art. 6 D.Lgs. 22/2015)</span>
+        </div>
+        <p style="margin: 0; font-size: 0.9rem; line-height: 1.5; color: var(--text-main);">
+          La NASpI spetta a partire dall'ottavo giorno successivo alla cessazione del rapporto di lavoro, oppure dal giorno successivo alla presentazione se la domanda viene inoltrata dopo l'ottavo giorno.
+        </p>
+      </div>
+
+      <!-- Finestra Condizioni di Utilizzo, Privacy & Disclaimer (Chiudibile e Richiamabile) -->
+      <div id="initial-policy-box" class="initial-policy-box">
+        <div class="initial-policy-header">
+          <span style="font-size: 0.8rem; font-weight: 700; color: var(--text-main); text-transform: uppercase; letter-spacing: 0.5px;">
+            Condizioni di Utilizzo, Privacy & Trasparenza
+          </span>
+          <button type="button" class="initial-policy-close-btn" onclick="toggleInitialPolicy(false)" title="Chiudi Finestra Informativa">
+            Chiudi Finestra ✕
+          </button>
+        </div>
+
+        <div class="disclaimer-box" style="background: var(--card-bg); border-width: 1.5px; margin-bottom: 0;">
+          <h3 style="color: var(--accent-error);">⚠ CONDIZIONI DI UTILIZZO, PRIVACY E LIMITI DEL SERVIZIO</h3>
+          <p>Prima di utilizzare gli strumenti di calcolo e le guide, si prega di prendere visione delle condizioni operative e di trasparenza:</p>
+          <ul style="margin: 10px 0 6px 18px; line-height: 1.6;">
+            <li><strong>Servizio Totalmente Gratuito & Senza Registrazione</strong>: L'accesso all'intero applicativo, ai simulatori e alle guide è al 100% gratuito per qualsiasi cittadino e non richiede alcuna registrazione, creazione di account, né cessione di email o credenziali.</li>
+            <li><strong>Sostenibilità tramite Banner Pubblicitari</strong>: Il portale è un'iniziativa divulgativa indipendente sostenuta economicamente grazie a banner pubblicitari non invasivi e brevi sponsorizzazioni video (Google Ads/AdMob). Tale modello permette di mantenere il servizio sempre aperto, aggiornato e completamente gratuito per gli utenti.</li>
+            <li><strong>Tutela della Privacy & Elaborazione Locale</strong>: Tutti i dati inseriti nei simulatori (settimane contributive, retribuzioni, motivazioni di cessazione) vengono elaborati <strong>esclusivamente in locale nel tuo browser</strong>. Nessun dato viene archiviato, tracciato o trasmesso a database o server esterni.</li>
+            <li><strong>Simulazione non vincolante</strong>: I calcoli e le proiezioni temporali (durata, importo mensile al 75%, décalage del 3%) hanno valore indicativo e si basano sui parametri standard di legge (D.Lgs. 22/2015 e Circolari INPS di rivalutazione aggiornate al 2026). L'importo effettivo viene liquidato unicamente dall'INPS a seguito di regolare istruttoria.</li>
+            <li><strong>Inoltro ufficiale telematico</strong>: Il tool non trasmette pratiche all'INPS. La presentazione della domanda deve essere effettuata personalmente dall'utente su <strong>www.inps.it</strong> tramite credenziali SPID, CIE o CNS entro il termine perentorio di 68 giorni.</li>
+          </ul>
+          <div style="text-align: right; margin-top: 12px; padding-top: 8px; border-top: 1px dashed var(--border-light);">
+            <button type="button" class="initial-policy-close-btn" onclick="toggleInitialPolicy(false)">
+              Chiudi Questa Finestra ✕
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card di riapertura quando la finestra è chiusa -->
+      <div id="initial-policy-reopen-card" class="initial-policy-reopen-card" onclick="toggleInitialPolicy(true)">
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <span class="minimal-icon-bw" style="display: flex; align-items: center; justify-content: center; width: 28px; height: 28px; border-radius: 4px; background: rgba(19, 26, 21, 0.08);">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+              <path d="m9 12 2 2 4-4"></path>
+            </svg>
+          </span>
+          <div>
+            <div style="font-weight: 700; font-size: 0.92rem; color: var(--text-main);" id="reopen-card-title">
+              Condizioni di Utilizzo, Privacy &amp; Disclaimer
+            </div>
+            <div style="font-size: 0.8rem; color: var(--text-muted);" id="reopen-card-sub">
+              100% Gratuito • Sostenuto da Ads • Privacy Locale (Clicca per riaprire)
+            </div>
+          </div>
+        </div>
+        <div style="font-size: 0.85rem; font-weight: 700; color: var(--accent-green); white-space: nowrap;" id="reopen-card-btn">
+          Apri Finestra →
+        </div>
+      </div>
+
+      <!-- Spazio Pubblicitario Banner Pagina Iniziale (Non invasivo, prima del pulsante) -->
+      <div class="ad-banner-slot" id="ad-slot-initial">
+        <div class="ad-banner-badge">
+          <span class="step-pill" style="background: var(--text-main); color: var(--white); font-size: 0.65rem; padding: 2px 6px;">SPONSOR</span>
+          <span class="ad-banner-label">Annuncio Pubblicitario</span>
+        </div>
+        <div class="ad-banner-content">
+          <!-- Predisposto per Google AdSense: <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-..." data-ad-slot="..." data-ad-format="auto" data-full-width-responsive="true"></ins> -->
+          <span>Spazio Pubblicitario • Banner Standard (Google AdSense / Ads)</span>
+        </div>
+      </div>
+
+      <button class="button-primary" onclick="navigateTo('view-main')" style="margin-top: 10px; font-size: 1.05rem; padding: 14px; width: 100%;">
+        Ho Letto l'Informativa • Accedi all'Assistente →
+      </button>
+    </main>
+
+    <!-- ========================================== -->
+    <!-- PAGINA PRINCIPALE: 4 PULSANTI OPERATIVI -->
+    <!-- ========================================== -->
+    <main id="view-main" class="view-page">
+      <div style="display: flex; justify-content: flex-end; margin-bottom: 8px;">
+        <span class="app-brand-badge">Area Operativa</span>
+      </div>
+      <h1>Servizi di Assistenza NASpI</h1>
+      <p class="subtitle">Seleziona una delle quattro funzionalità per procedere con la simulazione o la guida</p>
+
+      <div class="hero-banner">
+        <div>
+          <h2>DECORRENZA E TERMINI</h2>
+          <p>Se presentata entro 8 giorni dalla cessazione, la NASpI decorre dall'8° giorno. Se inviata dopo l'8° giorno, decorre dal giorno successivo all'invio.</p>
+        </div>
+        <span class="hero-pill">Circolare 94/2015</span>
+      </div>
+
+      <!-- Banner Ufficiale PDF 23 Pagine -->
+      <div class="pdf-download-card">
+        <div class="pdf-badge-row">
+          <span class="step-pill" style="background: var(--text-main); color: var(--white); font-size: 0.72rem; font-weight: 700; padding: 3px 8px; border-radius: 3px;">DOCUMENTO PDF</span>
+          <span style="font-size: 0.82rem; font-weight: 600; color: var(--text-muted);">23 Pagine • Formato Editoriale</span>
+        </div>
+        <h2>Manuale Ufficiale Schermata per Schermata</h2>
+        <p>
+          Visualizza la guida in formato PDF impaginata con le ricostruzioni grafiche di tutte le schermate INPS e le note operative.
+        </p>
+        <button type="button" onclick="openRewardedPdfAd()" class="button-primary" style="border:none;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+          <span>Apri PDF (23 Pagine)</span>
+        </button>
+      </div>
+
+      <!-- Spazio Pubblicitario Banner Menu Principale (Pagina Successiva) -->
+      <div class="ad-banner-slot" id="ad-slot-main">
+        <div class="ad-banner-badge">
+          <span class="step-pill" style="background: var(--text-main); color: var(--white); font-size: 0.65rem; padding: 2px 6px;">SPONSOR</span>
+          <span class="ad-banner-label">Annuncio Pubblicitario</span>
+        </div>
+        <div class="ad-banner-content">
+          <!-- Predisposto per Google AdSense: <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-..." data-ad-slot="..." data-ad-format="auto" data-full-width-responsive="true"></ins> -->
+          <span>Spazio Pubblicitario • Banner Standard (Google AdSense / Ads)</span>
+        </div>
+      </div>
+
+      <!-- I 4 PULSANTI CARD CHIESTI DALL'UTENTE -->
+      <section class="main-grid">
+        <!-- 1. Simulare i Requisiti -->
+        <article class="feature-card" onclick="navigateTo('view-requirements')">
+          <div>
+            <div class="feature-card-header">
+              <div class="feature-card-icon-box">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                </svg>
+              </div>
+              <span class="feature-card-badge">Art. 3 D.Lgs. 22/2015</span>
+            </div>
+            <h3>Simulare i Requisiti</h3>
+            <p>Verifica la sussistenza della disoccupazione involontaria e il possesso di almeno 13 settimane contributive nel quadriennio.</p>
+          </div>
+          <div class="feature-card-action">Apri sezione →</div>
+        </article>
+
+        <!-- 2. Simulare Durata e Importi -->
+        <article class="feature-card" onclick="navigateTo('view-amounts')">
+          <div>
+            <div class="feature-card-header">
+              <div class="feature-card-icon-box">
+                <svg viewBox="0 0 24 24" fill-rule="evenodd" aria-hidden="true">
+                  <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-6 3.25h5v1.5h-5v-1.5zM6.25 7.75h1.5V6.25H9v1.5h1.5v1.5H9v1.5H7.75v-1.5h-1.5v-1.5zm11.5 10.5h-5v-1.5h5v1.5zm0-2.5h-5v-1.5h5v1.5zm-10-1.25h1.5v-1.5H6.25v-1.5H7.75v1.5H9.25v1.5H7.75v1.5h-1.5z"/>
+                </svg>
+              </div>
+              <span class="feature-card-badge">Parametri INPS 2026</span>
+            </div>
+            <h3>Simulare Durata e Importi</h3>
+            <p>Calcola le settimane di indennità (settimane / 2), l'assegno mensile al 75% e la tabella temporale di décalage (-3%).</p>
+          </div>
+          <div class="feature-card-action">Apri sezione →</div>
+        </article>
+
+        <!-- 3. Guida Passo Passo alla Compilazione -->
+        <article class="feature-card" onclick="navigateTo('view-guide')">
+          <div>
+            <div class="feature-card-header">
+              <div class="feature-card-icon-box">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M21 5c-1.11-.35-2.33-.5-3.5-.5-1.95 0-4.05.4-5.5 1.5-1.45-1.1-3.55-1.5-5.5-1.5S2.45 4.9 1 6v14.65c0 .25.25.5.5.5.1 0 .15-.05.25-.05C3.1 20.45 5.05 20 6.5 20c1.95 0 4.05.4 5.5 1.5 1.35-.85 3.8-1.5 5.5-1.5 1.65 0 3.35.3 4.75 1.05.1.05.15.05.25.05.25 0 .5-.25.5-.5V6c-.6-.45-1.25-.75-2-1zm0 13.5c-1.1-.35-2.3-.5-3.5-.5-1.7 0-4.15.65-5.5 1.5V8c1.35-.85 3.8-1.5 5.5-1.5 1.2 0 2.4.15 3.5.5v11.5z"/>
+                </svg>
+              </div>
+              <span class="feature-card-badge">8 Fasi Guidate</span>
+            </div>
+            <h3>Guida Passo Passo alla Compilazione</h3>
+            <p>Istruzioni schermata per schermata per trasmettere la domanda online sul portale www.inps.it con SPID o CIE.</p>
+          </div>
+          <div class="feature-card-action">Apri sezione →</div>
+        </article>
+
+        <!-- 4. Documenti Necessari -->
+        <article class="feature-card" onclick="navigateTo('view-documents')">
+          <div>
+            <div class="feature-card-header">
+              <div class="feature-card-icon-box">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/>
+                </svg>
+              </div>
+              <span class="feature-card-badge">Checklist Interattiva</span>
+            </div>
+            <h3>Documenti Necessari</h3>
+            <p>Checklist interattiva con documenti d'identità, buste paga, lettere contrattuali e codice IBAN certificato.</p>
+          </div>
+          <div class="feature-card-action">Apri sezione →</div>
+        </article>
+      </section>
+
+      <!-- FAQ Accordion Ufficiali INPS -->
+      <h3 style="font-size: 1.1rem; margin: 28px 0 12px 0; text-transform: uppercase; letter-spacing: 0.5px;">
+        Domande Frequenti & Chiarimenti Circolari INPS
+      </h3>
+
+      <div class="faq-accordion" onclick="toggleFaq(this)">
+        <div class="faq-question">
+          <span>Ho dato le dimissioni volontarie: ho diritto alla NASpI?</span>
+          <span>+</span>
+        </div>
+        <div class="faq-answer">
+          No, le dimissioni ordinarie non danno diritto alla prestazione perché la disoccupazione deve essere "involontaria". Tuttavia, hai diritto alla NASpI se hai rassegnato <strong>dimissioni per giusta causa</strong> (mancato pagamento retribuzioni per almeno 2 mesi, mobbing comprovato, molestie) o durante il <strong>periodo tutelato di maternità/paternità</strong> (Art. 3 D.Lgs. 22/2015).
+        </div>
+      </div>
+
+      <div class="faq-accordion" onclick="toggleFaq(this)">
+        <div class="faq-question">
+          <span>Come e quando si applica il décalage del 3%?</span>
+          <span>+</span>
+        </div>
+        <div class="faq-answer">
+          A decorrere dal <strong>6° mese</strong> di fruizione (91° giorno), l'importo mensile lordo si riduce progressivamente del 3% ogni mese. Per i lavoratori che hanno compiuto <strong>55 anni</strong> alla data di cessazione del rapporto, il taglio scatta invece solo a partire dall'<strong>8° mese</strong> (Legge 234/2021).
+        </div>
+      </div>
+
+      <div class="faq-accordion" onclick="toggleFaq(this)">
+        <div class="faq-question">
+          <span>Posso richiedere la NASpI in un'unica soluzione per aprire partita IVA?</span>
+          <span>+</span>
+        </div>
+        <div class="faq-answer">
+          Sì, tramite la <strong>NASpI Anticipata</strong> (Art. 8 D.Lgs. 22/2015). Se avvii un'attività di lavoro autonomo, impresa individuale o sottoscrivi una quota di capitale in una cooperativa, puoi richiedere l'intero importo residuo spettante in un'unica soluzione, inoltrando la domanda entro 30 giorni dall'inizio attività.
+        </div>
+      </div>
+
+      <div class="faq-accordion" onclick="toggleFaq(this)">
+        <div class="faq-question">
+          <span>Quali sono gli adempimenti obbligatori su piattaforma SIISL e PAD?</span>
+          <span>+</span>
+        </div>
+        <div class="faq-answer">
+          <strong>NOTA INFORMATIVA: Adempimenti obbligatori NASpI su piattaforma SIISL</strong><br><br>
+          • <strong>Cos'è:</strong> L'iscrizione alla piattaforma SIISL è obbligatoria per mantenere il diritto alla disoccupazione NASpI.<br>
+          • <strong>Cosa succede all'inizio:</strong> Al momento dell'accoglimento della domanda, l'INPS ti iscrive automaticamente alla piattaforma e ti invia una notifica (SMS o e-mail). Non devi e non puoi farlo al momento dell'inoltro della domanda.<br>
+          • <strong>Cosa devi fare (Entro 15 giorni):</strong> Il termine di 15 giorni scatta dalla data di accoglimento/decorrenza della NASpI (non dall'inoltro). Entro questo termine devi accedere al sito SIISL tramite SPID o CIE per:
+          <ul style="margin: 6px 0 6px 20px;">
+            <li>Sottoscrivere il PAD (Patto di Attivazione Digitale).</li>
+            <li>Inserire o aggiornare il tuo Curriculum Vitae (CV).</li>
+          </ul>
+          • <strong>Fase finale:</strong> Successivamente verrai contattato dal tuo Centro per l'Impiego (CPI) per firmare il Patto di Servizio Personalizzato.<br>
+          • <strong>Sanzioni:</strong> Se non completi la procedura online o non ti presenti al CPI senza giustificato motivo rischi la sospensione o la perdita della NASpI.
+        </div>
+      </div>
+
+      <div class="faq-accordion" onclick="toggleFaq(this)">
+        <div class="faq-question">
+          <span>Comunicazioni NASpI (NASpI-Com): quando inviarlo e regole sul reddito?</span>
+          <span>+</span>
+        </div>
+        <div class="faq-answer">
+          <strong>NOTA INFORMATIVA: Quando inviare il modello NASpI-Com e regole sul reddito</strong><br><br>
+          Il modello NASpI-Com serve a comunicare all'INPS qualsiasi variazione durante la disoccupazione. Va inviato obbligatoriamente <strong>entro 30 giorni</strong> dall'evento.<br><br>
+          <div style="background: #FDE8E8; border: 1.2px solid #C53030; border-radius: 6px; padding: 10px; margin: 8px 0; color: #9B1C1C; font-weight: 700;">
+            REGOLA ASSOLUTA: Il modello NASpI-Com va sempre e comunque inviato in caso di qualsiasi ripresa di attività lavorativa (anche per un solo giorno, anche se il reddito è minimo o pari a zero, e anche se l'azienda effettua già le comunicazioni obbligatorie).
+          </div>
+          <strong>Casi di invio obbligatorio (Entro 30 giorni):</strong>
+          <ul style="margin: 8px 0 8px 20px;">
+            <li><strong>Nuovo lavoro dipendente o autonomo:</strong> Per comunicare l'inizio dell'attività e il reddito annuo presunto.</li>
+            <li><strong>Variazione del reddito:</strong> Se cambia il reddito presunto già dichiarato in precedenza.</li>
+            <li><strong>Eventi previdenziali o personali:</strong> Inizio di malattia, maternità, infortunio, espatrio o rinuncia alla NASpI.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="disclaimer-box">
+        <h3>Nota di Trasparenza</h3>
+        <p>Questo applicativo ad accesso libero garantisce la massima riservatezza. I dati rimangono sul tuo dispositivo locale.</p>
+      </div>
+    </main>
+
+    <!-- ========================================== -->
+    <!-- 1. SIMULATORE REQUISITI -->
+    <!-- ========================================== -->
+    <main id="view-requirements" class="view-page">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 12px;">
+        <button class="button-secondary" onclick="navigateTo('view-main')">← Torna al Menu</button>
+        <span class="app-brand-badge">Modulo 1 • Requisiti</span>
+      </div>
+
+      <h1>Simulatore Requisiti NASpI</h1>
+      <p class="subtitle">Verifica immediata dell'idoneità legale in base all'art. 3 del D.Lgs. 22/2015</p>
+
+      <div class="feature-card" style="margin-bottom: 20px; cursor: default;">
+        <div class="form-group">
+          <label for="cessation-select">1. Motivo della Cessazione del Lavoro:</label>
+          <select id="cessation-select" onchange="runRequirementsSimulation()">
+            <option value="licenziamento_eco">Licenziamento per Giustificato Motivo Oggettivo / Economico (Ammesso)</option>
+            <option value="licenziamento_disc">Licenziamento Disciplinare / Giusta Causa (Ammesso - Circolare 94/2015)</option>
+            <option value="scadenza_termine">Scadenza naturale Contratto a Termine / Stagionale (Ammesso)</option>
+            <option value="dimissioni_giusta_causa">Dimissioni per Giusta Causa - Mancati stipendi, mobbing (Ammesso)</option>
+            <option value="risoluzione_itl">Risoluzione Consensuale presso Ispettorato Territoriale Lavoro - ITL (Ammesso)</option>
+            <option value="maternita">Dimissioni nel periodo tutelato di Maternità/Paternità (Ammesso)</option>
+            <option value="dimissioni_volontarie">Dimissioni Volontarie Ordinarie (NON AMMESSO)</option>
+            <option value="risoluzione_privata">Risoluzione Consensuale Privata senza conciliazione ITL (NON AMMESSO)</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>2. Settimane di Contributi nei 4 Anni Precedenti (Minimo 13):</label>
+          <div class="slider-container">
+            <input type="range" id="req-weeks-slider" min="0" max="208" value="52" class="slider" oninput="updateReqWeeks(this.value); runRequirementsSimulation();">
+            <div class="slider-value-display">
+              <span>0 sett.</span>
+              <span id="req-weeks-display" style="font-size:1.1rem; color:var(--text-main);">52 settimane</span>
+              <span>208 sett. (4 anni)</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>3. Dichiarazioni e Condizioni Aggiuntive:</label>
+          <div class="checkbox-row">
+            <input type="checkbox" id="check-did" checked onchange="runRequirementsSimulation()">
+            <label for="check-did" style="text-transform:none; font-weight:normal; margin:0; cursor:pointer;">
+              Disponibile a rilasciare la DID (Dichiarazione di Immediata Disponibilità al lavoro)
+            </label>
+          </div>
+          <div class="checkbox-row">
+            <input type="checkbox" id="check-no-pension" checked onchange="runRequirementsSimulation()">
+            <label for="check-no-pension" style="text-transform:none; font-weight:normal; margin:0; cursor:pointer;">
+              Non titolare di pensione diretta (Vecchiaia, Anticipata o Quota 103)
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <!-- Verdetto Requisiti -->
+      <div id="req-result-box" class="result-box">
+        <!-- Generato via JavaScript -->
+      </div>
+    </main>
+
+    <!-- ========================================== -->
+    <!-- 2. SIMULATORE DURATA E IMPORTI -->
+    <!-- ========================================== -->
+    <main id="view-amounts" class="view-page">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 12px;">
+        <button class="button-secondary" onclick="navigateTo('view-main')">← Torna al Menu</button>
+        <span class="app-brand-badge">Modulo 2 • Calcolo</span>
+      </div>
+
+      <h1>Simulatore Durata e Importi</h1>
+      <p class="subtitle">Parametri e massimali aggiornati secondo le ultime disposizioni e circolari ufficiali INPS 2026</p>
+
+      <!-- Disclaimer Calcolo Ultimo Rapporto / Quadriennio -->
+      <div id="amounts-disclaimer-box" class="disclaimer-alert-box" style="background:#f4f9f6; border-left:4px solid var(--brand-primary, #1b382b); border-radius:6px; padding:14px 16px; margin-bottom:18px; color:var(--text-main, #131a15);">
+        <div style="display:flex; align-items:flex-start; gap:10px;">
+          <svg style="width:20px; height:20px; min-width:20px; color:var(--brand-primary, #1b382b); margin-top:2px;" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+          <span id="amounts-disclaimer-text" style="font-size:0.9rem; line-height:1.45; font-weight:500;">
+            Il calcolo della nuova indennità si baserà esclusivamente sui contributi e sugli stipendi del tuo ultimo rapporto di lavoro (o comunque sui periodi lavorativi successivi a una precedente domanda); altrimenti si va a calcolare sulla media dello stipendio mensile lordo fino a quattro anni indietro.
+          </span>
+        </div>
+      </div>
+
+      <!-- Box Principio Ufficiale di Calcolo Importo 2026 -->
+      <div id="amounts-principle-box" class="feature-card" style="margin-bottom: 20px; background: var(--card-bg); border-left: 4px solid var(--text-main); cursor: default; padding: 18px 20px;">
+        <div style="display:flex; align-items:center; gap:8px; margin-bottom:10px;">
+          <span class="step-pill" style="background:var(--text-main); color:var(--white); font-size:0.75rem; font-weight:700; padding:3px 8px; border-radius:3px;">
+            REGOLA UFFICIALE 2026
+          </span>
+          <h3 id="amounts-principle-title" style="font-size:1.02rem; font-weight:800; color:var(--text-main); margin:0;">
+            Come si calcola l'importo
+          </h3>
+        </div>
+
+        <p id="amounts-principle-main" style="font-size:0.95rem; font-weight:600; line-height:1.55; color:var(--text-main); margin-bottom:12px;">
+          L'importo della NASpI è pari al 75% della retribuzione media mensile degli ultimi quattro anni se lo stipendio medio è inferiore a 1.456,72 euro (cifra di riferimento per il 2026), fino a un massimo di 1.584,70 euro al mese.
+        </p>
+
+        <p id="amounts-principle-intro" style="font-size:0.88rem; font-style:italic; color:var(--text-muted); margin-bottom:10px;">
+          Il calcolo cambia in base alla media dei tuoi stipendi degli ultimi 4 anni:
+        </p>
+
+        <ul id="amounts-principle-list" style="margin: 0 0 4px 20px; font-size: 0.9rem; line-height: 1.6; color: var(--text-main);">
+          <li id="amounts-principle-low" style="margin-bottom: 6px;">
+            <strong>Stipendio basso o medio (fino a 1.456,72 €)</strong>: Prendi il 75% della tua retribuzione media.
+          </li>
+          <li id="amounts-principle-high" style="margin-bottom: 6px;">
+            <strong>Stipendio alto (oltre 1.456,72 €)</strong>: Prendi il 75% di 1.456,72 euro più il 25% della differenza tra il tuo stipendio medio e 1.456,72 euro.
+          </li>
+          <li id="amounts-principle-max" style="margin-bottom: 2px;">
+            <strong>Limite massimo</strong>: L'assegno non può comunque superare il massimale di 1.584,70 euro al mese per il 2026.
+          </li>
+        </ul>
+      </div>
+
+      <div class="feature-card" style="margin-bottom: 20px; cursor: default;">
+        <div class="form-group">
+          <label for="salary-input">Retribuzione Media Mensile Lorda Ultimi 4 Anni (€):</label>
+          <input type="number" id="salary-input" class="input-text" value="1800" min="400" max="8000" step="50" oninput="calculateAmounts()">
+          <small style="color:var(--text-muted); font-size:0.8rem;">Soglia di riferimento per il 2026: 1.456,72 € • Tetto massimo mensile erogabile: 1.584,70 € (Parametri INPS 2026)</small>
+        </div>
+
+        <div class="form-group">
+          <label>Settimane di Contribuzione nel Quadriennio (Senza contributi accreditati ad altra prestazione):</label>
+          <div class="slider-container">
+            <input type="range" id="amount-weeks-slider" min="13" max="208" value="104" class="slider" oninput="updateAmountWeeks(this.value); calculateAmounts();">
+            <div class="slider-value-display">
+              <span>13 sett.</span>
+              <span id="amount-weeks-display" style="font-size:1.1rem; color:var(--text-main);">104 settimane (2 anni)</span>
+              <span>208 sett. (4 anni)</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="checkbox-row" style="background:var(--surface); padding:10px; border-radius:4px;">
+            <input type="checkbox" id="check-over55" onchange="calculateAmounts()">
+            <label for="check-over55" style="text-transform:none; font-weight:700; margin:0; cursor:pointer;">
+              Lavoratore Over 55 (Almeno 55 anni compiuti alla data di cessazione)
+            </label>
+          </div>
+          <small style="color:var(--text-muted); font-size:0.78rem; display:block; margin-top:4px;">
+            In base alla Legge 234/2021, per gli Over 55 il taglio del 3% decorre dall'8° mese invece che dal 6°.
+          </small>
+        </div>
+      </div>
+
+      <!-- Risultati Calcolo -->
+      <div id="amounts-result-box" class="result-box">
+        <!-- Generato via JavaScript -->
+      </div>
+    </main>
+
+    <!-- ========================================== -->
+    <!-- 3. GUIDA PASSO PASSO PORTALE INPS -->
+    <!-- ========================================== -->
+    <main id="view-guide" class="view-page">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 12px;">
+        <button class="button-secondary" onclick="navigateTo('view-main')">← Torna al Menu</button>
+        <span class="app-brand-badge">Modulo 3 • Portale</span>
+      </div>
+
+      <h1>Guida Passo Passo alla Domanda</h1>
+      <p class="subtitle">Procedura ufficiale di trasmissione online su www.inps.it con SPID o CIE</p>
+
+      <div class="hero-banner" style="margin-bottom: 20px;">
+        <div>
+          <h2>ACCESSO AUTONOMO</h2>
+          <p>La domanda può essere inviata 24 ore su 24 accedendo all'area MyINPS con le proprie credenziali digitali.</p>
+        </div>
+        <span class="hero-pill">MyINPS</span>
+      </div>
+
+      <!-- Banner Download PDF in Guida -->
+      <div class="pdf-download-card" style="margin-bottom: 20px;">
+        <div class="pdf-badge-row">
+          <span class="step-pill" style="background: var(--text-main); color: var(--white); font-size: 0.72rem; font-weight: 700; padding: 3px 8px; border-radius: 3px;">DOCUMENTO PDF</span>
+          <span style="font-size: 0.82rem; font-weight: 600; color: var(--text-muted);">23 Pagine • Formato Editoriale</span>
+        </div>
+        <h2 style="font-size: 1.25rem;">Manuale Ufficiale Schermata per Schermata</h2>
+        <p>
+          Visualizza la guida in formato PDF impaginata con le ricostruzioni grafiche di tutte le schermate INPS e le note operative.
+        </p>
+        <button type="button" onclick="openRewardedPdfAd()" class="button-primary" style="border:none;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+          <span>Apri PDF (23 Pagine)</span>
+        </button>
+      </div>
+
+      <div class="disclaimer-box" style="margin-bottom: 20px; border-left: 4px solid var(--text-main); background: var(--card-bg);">
+        <div style="font-weight: 700; margin-bottom: 4px; display: flex; align-items: center; gap: 6px;">
+          <span class="minimal-icon-bw">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="12" cy="13" r="8"></circle>
+              <path d="M12 9v4l2.5 2.5"></path>
+              <path d="M10 2h4"></path>
+              <path d="M12 2v3"></path>
+            </svg>
+          </span>
+          <span>Decorrenza del pagamento:</span>
+        </div>
+        <p style="margin: 0; font-size: 0.9rem; line-height: 1.5; color: var(--text-main);">
+          La NASpI spetta a partire dall'ottavo giorno successivo alla cessazione del rapporto di lavoro, oppure dal giorno successivo alla presentazione se la domanda viene inoltrata dopo l'ottavo giorno.
+        </p>
+      </div>
+
+      <div id="guide-steps-container">
+        <!-- Step 1 -->
+        <article class="step-card">
+          <div class="step-header">
+            <span class="step-pill">FASE 1 DI 8</span>
+            <span style="font-size:0.8rem; font-weight:bold;">Autenticazione</span>
+          </div>
+          <h3 class="step-title">Accesso all'Identità Digitale</h3>
+          <p>Collegati al portale ufficiale <strong>www.inps.it</strong> e clicca in alto a destra su <em>"Entra in MyINPS"</em>.</p>
+          <div class="step-path">Home > Entra in MyINPS > SPID / CIE / CNS</div>
+          <ul class="step-tips">
+            <li>SPID di Livello 2 (PosteID, Aruba, InfoCert, Sielte, etc.)</li>
+            <li>CIE (Carta di Identità Elettronica 3.0) con PIN e app CieID</li>
+            <li>I vecchi codici PIN INPS non sono più validi per i cittadini.</li>
+          </ul>
+        </article>
+
+        <!-- Step 2 -->
+        <article class="step-card">
+          <div class="step-header">
+            <span class="step-pill">FASE 2 DI 8</span>
+            <span style="font-size:0.8rem; font-weight:bold;">Ricerca Servizio</span>
+          </div>
+          <h3 class="step-title">Ricerca del Servizio NASpI</h3>
+          <p>Nella barra di ricerca principale digita <em>"NASpI: indennità mensile di disoccupazione"</em> e seleziona il servizio.</p>
+          <div class="step-path">Prestazioni e Servizi > NASpI: indennità mensile > Nuova Domanda</div>
+          <ul class="step-tips">
+            <li>Clicca su "Utilizza il servizio" e seleziona il profilo "Cittadino"</li>
+            <li>Nel menu a sinistra fai clic su "Nuova Domanda"</li>
+          </ul>
+        </article>
+
+        <!-- Step 3 -->
+        <article class="step-card">
+          <div class="step-header">
+            <span class="step-pill">FASE 3 DI 8</span>
+            <span style="font-size:0.8rem; font-weight:bold;">Anagrafica</span>
+          </div>
+          <h3 class="step-title">Verifica Dati Anagrafici e Recapiti</h3>
+          <p>Controlla l'esattezza dell'indirizzo di residenza, inserisci un numero di cellulare attivo e l'indirizzo email per ricevere gli SMS di notifica INPS sull'avanzamento.</p>
+        </article>
+
+        <!-- Step 4 -->
+        <article class="step-card">
+          <div class="step-header">
+            <span class="step-pill">FASE 4 DI 8</span>
+            <span style="font-size:0.8rem; font-weight:bold;">Rapporto di Lavoro</span>
+          </div>
+          <h3 class="step-title">Dati Ultimo Lavoro e Motivo Fine Rapporto</h3>
+          <p>Inserisci la data esatta dell'ultimo giorno lavorato e seleziona la motivazione conforme ai tuoi documenti (Licenziamento, Scadenza termine o Dimissioni per giusta causa).</p>
+        </article>
+
+        <!-- Step 5 -->
+        <article class="step-card">
+          <div class="step-header">
+            <span class="step-pill">FASE 5 DI 8</span>
+            <span style="font-size:0.8rem; font-weight:bold;">Pagamento</span>
+          </div>
+          <h3 class="step-title">Coordinate di Pagamento (IBAN)</h3>
+          <p>Inserisci il codice IBAN del tuo conto corrente bancario, postale o carta conto abilitata.</p>
+          <div class="step-path">ATTENZIONE: L'IBAN deve essere intestato o cointestato al richiedente.</div>
+        </article>
+
+        <!-- Step 6 -->
+        <article class="step-card">
+          <div class="step-header">
+            <span class="step-pill">FASE 6 DI 8</span>
+            <span style="font-size:0.8rem; font-weight:bold;">DID & Redditi</span>
+          </div>
+          <h3 class="step-title">Dichiarazione DID e Redditi Presunti</h3>
+          <p>La dichiarazione di immediata disponibilità al lavoro (DID) è integrata nel modello telematico. Indica se prevedi redditi da lavoro autonomo o occasionale nel corso dell'anno solare.</p>
+        </article>
+
+        <!-- Step 7 -->
+        <article class="step-card">
+          <div class="step-header">
+            <span class="step-pill">FASE 7 DI 8</span>
+            <span style="font-size:0.8rem; font-weight:bold;">Invio Pratica</span>
+          </div>
+          <h3 class="step-title">Riepilogo e Invio Telematico</h3>
+          <p>Rivedi attentamente tutti i campi, conferma la veridicità delle dichiarazioni e clicca su <em>"Invia Domanda"</em>. <strong>Scarica e salva il file PDF della ricevuta con il numero di protocollo INPS</strong>.</p>
+        </article>
+
+        <!-- Step 8 -->
+        <article class="step-card">
+          <div class="step-header">
+            <span class="step-pill">FASE 8 DI 8</span>
+            <span style="font-size:0.8rem; font-weight:bold;">SIISL & Centro Impiego</span>
+          </div>
+          <h3 class="step-title">Piattaforma SIISL e Attivazione al Centro per l'Impiego</h3>
+          <p>Adempimenti obbligatori per mantenere il diritto all'indennità: attivazione sulla piattaforma SIISL e stipula del Patto di Servizio.</p>
+        </article>
+      </div>
+
+      <!-- NOTA INFORMATIVA SIISL -->
+      <div id="guide-siisl-box" class="disclaimer-box" style="margin-top: 24px; border: 2px solid var(--text-main); background: #DEE9E1; border-radius: 8px; padding: 20px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+          <span class="feature-card-badge" style="background: var(--text-main); color: #ffffff; border-color: var(--text-main);">NOTA INFORMATIVA</span>
+          <span style="font-size: 0.85rem; font-weight: 700; color: var(--text-main);">Piattaforma SIISL</span>
+        </div>
+
+        <h3 style="font-size: 1.15rem; font-weight: 800; margin-bottom: 14px; color: var(--text-main);">
+          Adempimenti obbligatori NASpI su piattaforma SIISL
+        </h3>
+
+        <div style="font-size: 0.92rem; line-height: 1.6; color: var(--text-main);">
+          <p style="margin-bottom: 10px;">
+            <strong>• Cos'è:</strong> L'iscrizione alla piattaforma SIISL è obbligatoria per mantenere il diritto alla disoccupazione NASpI.
+          </p>
+          <p style="margin-bottom: 10px;">
+            <strong>• Cosa succede all'inizio:</strong> Al momento dell'accoglimento della domanda, l'INPS ti iscrive automaticamente alla piattaforma e ti invia una notifica (SMS o e-mail). Non devi e non puoi farlo al momento dell'inoltro della domanda.
+          </p>
+          <p style="margin-bottom: 10px;">
+            <strong>• Cosa devi fare (Entro 15 giorni):</strong> Il termine di 15 giorni scatta dalla data di accoglimento/decorrenza della NASpI (non dall'inoltro). Entro questo termine devi accedere al sito SIISL tramite SPID o CIE per:
+          </p>
+          <ul style="margin: 6px 0 12px 24px;">
+            <li>Sottoscrivere il PAD (Patto di Attivazione Digitale).</li>
+            <li>Inserire o aggiornare il tuo Curriculum Vitae (CV).</li>
+          </ul>
+          <p style="margin-bottom: 12px;">
+            <strong>• Fase finale:</strong> Successivamente verrai contattato dal tuo Centro per l'Impiego (CPI) per firmare il Patto di Servizio Personalizzato.
+          </p>
+          <div style="background: #FDE8E8; border: 1.2px solid #C53030; border-radius: 6px; padding: 12px; margin-top: 10px; color: #9B1C1C; font-weight: 600;">
+            ⚠ Sanzioni: Se non completi la procedura online o non ti presenti al CPI senza giustificato motivo rischi la sospensione o la perdita della NASpI.
+          </div>
+        </div>
+      </div>
+
+      <button class="button-primary" onclick="navigateTo('view-main')" style="margin-top: 20px;">
+        ← Torna al Menu Principale
+      </button>
+    </main>
+
+    <!-- ========================================== -->
+    <!-- 4. CHECKLIST DOCUMENTI NECESSARI -->
+    <!-- ========================================== -->
+    <main id="view-documents" class="view-page">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 12px;">
+        <button class="button-secondary" onclick="navigateTo('view-main')">← Torna al Menu</button>
+        <span class="app-brand-badge">Modulo 4 • Checklist</span>
+      </div>
+
+      <h1>Documenti Necessari per la Domanda</h1>
+      <p class="subtitle">Checklist interattiva: spunta i documenti già pronti (salvati in memoria nel browser)</p>
+
+      <div class="filter-buttons">
+        <button class="filter-btn active" onclick="filterDocs('all', this)">Tutti i Documenti</button>
+        <button class="filter-btn" onclick="filterDocs('mandatory', this)">Solo Obbligatori</button>
+        <button class="filter-btn" onclick="filterDocs('missing', this)">Da Reperire</button>
+      </div>
+
+      <div id="docs-list">
+        <!-- Rendered via JS -->
+      </div>
+
+      <button class="button-primary" onclick="navigateTo('view-main')" style="margin-top: 20px;">
+        ← Torna al Menu Principale
+      </button>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+      <!-- Banner Fisso Non Sostituzione a Enti Professionali presente su ogni pagina -->
+      <div class="fixed-disclaimer-banner">
+        <div class="fixed-disclaimer-header">
+          <span class="minimal-icon-bw" style="display:inline-flex;align-items:center;justify-content:center;margin-right:6px;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"></path><path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"></path><path d="M7 21h10"></path><path d="M12 3v18"></path><path d="M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2"></path></svg></span>
+          <span class="fixed-disclaimer-title" id="banner-fixed-title">Non Sostituzione a Enti Professionali</span>
+        </div>
+        <p class="fixed-disclaimer-sub" id="banner-fixed-sub">
+          Il presente applicativo è un supporto informativo e divulgativo. Esso NON si sostituisce in alcun modo a:
+        </p>
+        <ul class="fixed-disclaimer-list">
+          <li id="banner-fixed-b1"><strong>Centri di Assistenza Fiscale (CAF)</strong></li>
+          <li id="banner-fixed-b2"><strong>Istituti di Patronato riconosciuti dalla legge</strong></li>
+          <li id="banner-fixed-b3"><strong>Consulenti del Lavoro o professionisti abilitati</strong></li>
+          <li id="banner-fixed-b4"><strong>Sportelli ufficiali dell'INPS o canali Contact Center</strong></li>
+        </ul>
+      </div>
+
+      <div class="footer-info-row">
+        <div>Banca Dati Normativa INPS • D.Lgs. 22/2015</div>
+        <div>Circolari e Fonti Ufficiali INPS: Aggiornate al 2026 • NASpiFacile</div>
+      </div>
+      <div class="footer-creator-badge">
+        Created by Croz Design®
+      </div>
+      <!-- Ultima scritta nel footer di ogni pagina: Policy e Privacy -->
+      <div class="footer-policy-row">
+        <button type="button" onclick="openPolicyModal()" class="footer-policy-btn" id="footer-policy-link">
+          Policy e Privacy
+        </button>
+      </div>
+    </footer>
+
+    <!-- Modal Finestra Policy, Condizioni e Privacy -->
+    <div id="policy-modal" class="ad-modal-overlay" role="dialog" aria-modal="true">
+      <div class="ad-modal-box" style="background-color: #E7EFEA !important; background: #E7EFEA !important; max-width: 620px; max-height: 85vh; overflow-y: auto; text-align: left; padding: 22px;">
+        <div class="ad-modal-header" style="border-bottom: 1.5px solid var(--border-light); padding-bottom: 10px; margin-bottom: 14px;">
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <span class="step-pill" style="background: var(--text-main); color: var(--white); font-size: 0.72rem; font-weight: 700; padding: 3px 8px; border-radius: 3px;">
+              INFORMATIVA
+            </span>
+            <span id="modal-policy-header-title" style="font-size: 0.95rem; font-weight: 800; color: var(--text-main);">
+              Condizioni di Utilizzo, Privacy & Trasparenza
+            </span>
+          </div>
+          <button class="ad-modal-close-btn" onclick="closePolicyModal()" title="Chiudi Finestra">✕</button>
+        </div>
+
+        <div id="modal-policy-body">
+          <h3 style="color: var(--accent-error); font-size: 1.05rem; margin-top: 0; margin-bottom: 8px;">⚠ CONDIZIONI DI UTILIZZO, PRIVACY E LIMITI DEL SERVIZIO</h3>
+          <p style="margin-bottom: 12px; font-size: 0.88rem; line-height: 1.5; color: var(--text-main);">Prima di utilizzare gli strumenti di calcolo e le guide, si prega di prendere visione delle condizioni operative e di trasparenza:</p>
+          <ul style="margin: 10px 0 14px 18px; line-height: 1.6; font-size: 0.86rem; color: var(--text-main);">
+            <li style="margin-bottom: 8px;"><strong>Servizio Totalmente Gratuito & Senza Registrazione</strong>: L'accesso all'intero applicativo, ai simulatori e alle guide è al 100% gratuito per qualsiasi cittadino e non richiede alcuna registrazione, creazione di account, né cessione di email o credenziali.</li>
+            <li style="margin-bottom: 8px;"><strong>Sostenibilità tramite Banner Pubblicitari</strong>: Il portale è un'iniziativa divulgativa indipendente sostenuta economicamente grazie a banner pubblicitari non invasivi e brevi sponsorizzazioni video (Google Ads/AdMob). Tale modello permette di mantenere il servizio sempre aperto, aggiornato e completamente gratuito per gli utenti.</li>
+            <li style="margin-bottom: 8px;"><strong>Tutela della Privacy & Elaborazione Locale</strong>: Tutti i dati inseriti nei simulatori (settimane contributive, retribuzioni, motivazioni di cessazione) vengono elaborati <strong>esclusivamente in locale nel tuo browser</strong>. Nessun dato viene archiviato, tracciato o trasmesso a database o server esterni.</li>
+            <li style="margin-bottom: 8px;"><strong>Simulazione non vincolante</strong>: I calcoli e le proiezioni temporali (durata, importo mensile al 75%, décalage del 3%) hanno valore indicativo e si basano sui parametri standard di legge (D.Lgs. 22/2015 e Circolari INPS di rivalutazione aggiornate al 2026). L'importo effettivo viene liquidato unicamente dall'INPS a seguito di regolare istruttoria.</li>
+            <li style="margin-bottom: 8px;"><strong>Inoltro ufficiale telematico</strong>: Il tool non trasmette pratiche all'INPS. La presentazione della domanda deve essere effettuata personalmente dall'utente su <strong>www.inps.it</strong> tramite credenziali SPID, CIE o CNS entro il termine perentorio di 68 giorni.</li>
+          </ul>
+        </div>
+
+        <div style="margin-top: 18px; border-top: 1px solid var(--border-light); padding-top: 14px;">
+          <button class="button-primary" onclick="closePolicyModal()" style="width: 100%; justify-content: center;" id="modal-policy-close-btn">
+            Ho Letto e Compreso • Chiudi Finestra
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal Rewarded Video Ad per il download del PDF -->
+    <div id="ad-video-modal" class="ad-modal-overlay" role="dialog" aria-modal="true">
+      <div class="ad-modal-box">
+        <div class="ad-modal-header">
+          <span id="video-ad-modal-badge" class="step-pill" style="background: var(--text-main); color: var(--white); font-size: 0.72rem; font-weight: 700; padding: 3px 8px; border-radius: 3px;">
+            SPONSOR • VIDEO
+          </span>
+          <button class="ad-modal-close-btn" onclick="closeRewardedPdfAd()" title="Chiudi / Salta">✕</button>
+        </div>
+        <h2 id="video-ad-modal-title" style="font-size: 1.25rem; font-weight: 700; margin: 0 0 6px 0; color: var(--text-main);">Video Sponsorizzato</h2>
+        <p id="video-ad-modal-desc" style="font-size: 0.88rem; color: var(--text-muted); margin: 0 0 14px 0; line-height: 1.4;">
+          Guarda il breve video per sbloccare la Guida PDF Ufficiale INPS (23 Pagine)
+        </p>
+
+        <!-- Player Video Simulato -->
+        <div class="ad-video-mockup">
+          <div id="video-mock-play-icon" style="width: 44px; height: 44px; border-radius: 50%; background: rgba(255,255,255,0.18); display: flex; align-items: center; justify-content: center; margin-bottom: 8px;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg>
+          </div>
+          <span id="video-mock-sponsor-label" style="font-size: 0.82rem; font-weight: 600; letter-spacing: 0.4px;">Partner Ufficiale Servizi Lavoro • Video Spot</span>
+        </div>
+
+        <!-- Sezione Timer / Countdown -->
+        <div id="video-ad-timer-section">
+          <div id="video-ad-countdown-text" style="font-size: 0.92rem; font-weight: 700; color: var(--text-main);">
+            Sblocco risorsa tra: 5s
+          </div>
+          <div class="ad-progress-bar-container">
+            <div id="video-ad-progress-fill" class="ad-progress-bar-fill"></div>
+          </div>
+          <button id="video-ad-skip-btn" class="button-secondary" onclick="closeRewardedPdfAd()" style="font-size: 0.82rem; padding: 6px 14px;">
+            Salta / Chiudi
+          </button>
+        </div>
+
+        <!-- Sezione Sblocco Risorsa (Visualizzata al completamento) -->
+        <div id="video-ad-unlocked-section" style="display: none; margin-top: 10px;">
+          <div id="video-ad-unlocked-badge" style="background: rgba(30, 130, 76, 0.12); border: 1px solid rgba(30, 130, 76, 0.4); border-radius: 6px; padding: 10px; margin-bottom: 14px; color: var(--accent-success); font-weight: 700; font-size: 0.9rem;">
+            ✓ Risorsa Sbloccata con Successo!
+          </div>
+          <a id="video-ad-download-btn" href="/guidanaspicompilazione2026.pdf" download="guidanaspicompilazione2026.pdf" target="_blank" class="button-primary" style="width: 100%; text-decoration: none; display: inline-flex; justify-content: center; align-items: center; gap: 8px; box-sizing: border-box; padding: 12px; border: none;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+            <span>Scarica e Apri PDF →</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Application Logic -->
+  <script>
+    // Minimalist monochrome vector icons
+    const SVG_CLOCK_BW = `<span class="minimal-icon-bw" style="margin-right: 6px;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="13" r="8"></circle><path d="M12 9v4l2.5 2.5"></path><path d="M10 2h4"></path><path d="M12 2v3"></path></svg></span>`;
+    const SVG_SHIELD_BW = `<span class="minimal-icon-bw" style="display:flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:4px;background:rgba(19,26,21,0.08);"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><path d="m9 12 2 2 4-4"></path></svg></span>`;
+    const SVG_SCALE_BW = `<span class="minimal-icon-bw" style="display:inline-flex;align-items:center;justify-content:center;margin-right:6px;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"></path><path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"></path><path d="M7 21h10"></path><path d="M12 3v18"></path><path d="M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2"></path></svg></span>`;
+
+    // Navigation Router
+    function navigateTo(viewId) {
+      document.querySelectorAll('.view-page').forEach(page => {
+        page.classList.remove('active');
+      });
+      const target = document.getElementById(viewId);
+      if (target) {
+        target.classList.add('active');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    }
+
+    // Toggle FAQ
+    function toggleFaq(element) {
+      element.classList.toggle('open');
+      const symbol = element.querySelector('.faq-question span:last-child');
+      if (symbol) {
+        symbol.textContent = element.classList.contains('open') ? '−' : '+';
+      }
+    }
+
+    // 1. REQUISITI LOGIC
+    function updateReqWeeks(val) {
+      const unit = currentAppLanguage === 'EN' ? 'weeks' : 'settimane';
+      document.getElementById('req-weeks-display').textContent = `${val} ${unit}`;
+    }
+
+    function runRequirementsSimulation() {
+      const cessation = document.getElementById('cessation-select').value;
+      const weeks = parseInt(document.getElementById('req-weeks-slider').value, 10);
+      const did = document.getElementById('check-did').checked;
+      const noPension = document.getElementById('check-no-pension').checked;
+
+      const isCessationOk = !['dimissioni_volontarie', 'risoluzione_privata'].includes(cessation);
+      const isWeeksOk = weeks >= 13;
+      const isEligible = isCessationOk && isWeeksOk && did && noPension;
+
+      const container = document.getElementById('req-result-box');
+      const isEn = currentAppLanguage === 'EN';
+
+      let reasons = [];
+      if (!isCessationOk) {
+        reasons.push(isEn 
+          ? 'The selected termination reason constitutes voluntary ordinary resignation not protected by NASpI (Art. 3 Legislative Decree 22/2015).'
+          : 'Il motivo di cessazione selezionato costituisce recesso volontario ordinario non tutelato da NASpI (Art. 3 D.Lgs. 22/2015).');
+      }
+      if (!isWeeksOk) {
+        reasons.push(isEn
+          ? `You have ${weeks} weeks: at least 13 are required in the past 4 years (you need ${13 - weeks} more weeks).`
+          : `Disponi di ${weeks} settimane: ne occorrono almeno 13 nel quadriennio (ti mancano ${13 - weeks} settimane).`);
+      }
+      if (!did) {
+        reasons.push(isEn
+          ? 'It is mandatory to issue the DID (Immediate Availability Declaration).'
+          : 'È obbligatorio rilasciare la DID (Dichiarazione di Immediata Disponibilità).');
+      }
+      if (!noPension) {
+        reasons.push(isEn
+          ? 'Holding a direct retirement pension is incompatible with receiving NASpI.'
+          : 'La titolarità di pensione diretta è incompatibile con la percezione della NASpI.');
+      }
+
+      const badgeText = isEligible 
+        ? (isEn ? '✓ ELIGIBILITY REQUIREMENTS MET' : '✓ REQUISITI SODDISFATTI')
+        : (isEn ? '✗ REQUIREMENTS NOT MET' : '✗ REQUISITI NON SODDISFATTI');
+
+      const descText = isEligible
+        ? (isEn 
+            ? 'Based on the entered parameters, you meet the legal requirements to apply for NASpI unemployment benefits. Remember to submit within 68 days of termination.' 
+            : 'In base ai parametri inseriti, hai maturato i requisiti di legge per presentare la domanda di disoccupazione NASpI. Ricorda di trasmetterla entro 68 giorni dalla data di fine rapporto.')
+        : (isEn 
+            ? 'Currently, one or more mandatory requirements are missing:' 
+            : 'Attualmente uno o più requisiti obbligatori risultano mancanti:');
+
+      const btnText = isEn ? 'Proceed to Amount Calculation →' : 'Procedi al Calcolo dell\'Importo →';
+
+      container.innerHTML = `
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+          <span class="${isEligible ? 'badge-eligible' : 'badge-not-eligible'}">
+            ${badgeText}
+          </span>
+          <span style="font-size:0.8rem; font-weight:bold;">Art. 3 D.Lgs. 22/2015</span>
+        </div>
+        <p style="font-size:0.95rem; line-height:1.5;">
+          ${descText}
+        </p>
+        ${reasons.length > 0 ? `<ul style="margin:10px 0 10px 20px; font-size:0.9rem; color:var(--accent-error);">${reasons.map(r => `<li>${r}</li>`).join('')}</ul>` : ''}
+        <div style="margin-top:16px; display:flex; gap:10px;">
+          <button class="button-primary" onclick="navigateTo('view-amounts')" ${!isEligible ? 'style="opacity:0.8;"' : ''}>
+            ${btnText}
+          </button>
+        </div>
+      `;
+    }
+
+    // 2. IMPORTI LOGIC
+    function updateAmountWeeks(val) {
+      const months = (val / 4.33).toFixed(1);
+      const isEn = currentAppLanguage === 'EN';
+      const weeksStr = isEn ? 'weeks' : 'settimane';
+      const monthsStr = isEn ? 'months' : 'mesi';
+      document.getElementById('amount-weeks-display').textContent = `${val} ${weeksStr} (~${months} ${monthsStr})`;
+    }
+
+    function calculateAmounts() {
+      const salary = parseFloat(document.getElementById('salary-input').value) || 0;
+      const weeksWorked = parseInt(document.getElementById('amount-weeks-slider').value, 10);
+      const isOver55 = document.getElementById('check-over55').checked;
+      const isEn = currentAppLanguage === 'EN';
+
+      // Parametri Ufficiali INPS 2026
+      const SOGLIA = 1456.72;
+      const MASSIMALE = 1584.70;
+
+      // Durata: settimane / 2 (max 104 settimane = 24 mesi)
+      const durationWeeks = Math.min(Math.floor(weeksWorked / 2), 104);
+      const durationMonths = Math.max(1, Math.round(durationWeeks / 4.33));
+
+      // Importo Lordo Base
+      let initialGross = 0;
+      if (salary <= SOGLIA) {
+        initialGross = salary * 0.75;
+      } else {
+        initialGross = (SOGLIA * 0.75) + ((salary - SOGLIA) * 0.25);
+      }
+      initialGross = Math.min(initialGross, MASSIMALE);
+
+      // Décalage: dal 6° mese (over 55: dall'8° mese)
+      const decalageStart = isOver55 ? 8 : 6;
+
+      let scheduleHtml = '';
+      let totalGross = 0;
+      let currentAmount = initialGross;
+
+      for (let m = 1; m <= durationMonths; m++) {
+        if (m >= decalageStart) {
+          currentAmount = currentAmount * 0.97; // taglio 3%
+        }
+        totalGross += currentAmount;
+
+        const isDecalage = m >= decalageStart;
+        const monthLabel = isEn ? `Month ${m}` : `Mese ${m}`;
+        const statusLabel = isDecalage
+          ? (isEn ? '<span style="color:var(--accent-warning); font-weight:bold;">-3% (reduction)</span>' : '<span style="color:var(--accent-warning); font-weight:bold;">-3% (décalage)</span>')
+          : (isEn ? '<span style="color:var(--accent-green); font-weight:bold;">Full (100%)</span>' : '<span style="color:var(--accent-green); font-weight:bold;">Pieno (100%)</span>');
+
+        scheduleHtml += `
+          <tr>
+            <td><strong>${monthLabel}</strong></td>
+            <td><strong>€ ${currentAmount.toFixed(2)}</strong></td>
+            <td>${statusLabel}</td>
+          </tr>
+        `;
+      }
+
+      const container = document.getElementById('amounts-result-box');
+      const titleText = isEn 
+        ? 'Calculation Estimate Summary (Official INPS 2026 Parameters)'
+        : 'Riepilogo Stima di Calcolo (Parametri Ufficiali INPS 2026)';
+      const initGrossLabel = isEn ? 'Initial Gross Amount' : 'Importo Iniziale Lordo';
+      const perMonthLabel = isEn ? ' /month' : ' /mese';
+      const durationLabel = isEn ? 'Entitled Duration' : 'Durata Spettante';
+      const weeksUnit = isEn ? 'weeks' : 'sett.';
+      const monthsUnit = isEn ? 'months' : 'mesi';
+      const decalageLabel = isEn ? '3% Reduction Start' : 'Avvio Taglio 3%';
+      const monthUnit = isEn ? 'th month' : '° mese';
+      const totalLabel = isEn ? 'Estimated Gross Total' : 'Totale Lordo Stimato';
+      const decorrenzaTitle = isEn ? 'Effective Date of Payment:' : 'Decorrenza del pagamento:';
+      const decorrenzaText = isEn
+        ? 'NASpI is payable starting from the 8th day following employment termination, or from the day following submission if the claim is filed after the 8th day.'
+        : 'La NASpI spetta a partire dall\'ottavo giorno successivo alla cessazione del rapporto di lavoro, oppure dal giorno successivo alla presentazione se la domanda viene inoltrata dopo l\'ottavo giorno.';
+      const projTitle = isEn ? 'Monthly Projection with Progressive Reduction:' : 'Proiezione Mensile con Décalage Progressivo:';
+      const colMonth = isEn ? 'Benefit Month' : 'Mese di Fruizione';
+      const colAmount = isEn ? 'Gross Monthly Amount' : 'Importo Mensile Lordo';
+      const colStatus = isEn ? 'Quota Status' : 'Stato Quota';
+      const footnote = isEn
+        ? '* Amounts shown are gross. INPS applies IRPEF tax withholdings and credits figurative pension contributions for the entire benefit period.'
+        : '* Gli importi indicati sono lordi. L\'INPS applica le trattenute IRPEF in qualità di sostituto d\'imposta e riconosce la contribuzione figurativa utile ai fini pensionistici per l\'intero periodo di fruizione.';
+      const guideBtn = isEn ? 'Consult the Step-by-Step Filing Guide →' : 'Consulta la Guida Passo Passo per la Domanda →';
+
+      container.innerHTML = `
+        <h3 style="margin-bottom:12px;">${titleText}</h3>
+
+        <div class="result-stats-grid">
+          <div class="stat-card">
+            <div class="stat-label">${initGrossLabel}</div>
+            <div class="stat-value">€ ${initialGross.toFixed(2)}<span style="font-size:0.8rem; font-weight:normal;">${perMonthLabel}</span></div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">${durationLabel}</div>
+            <div class="stat-value">${durationWeeks} ${weeksUnit}<span style="font-size:0.8rem; font-weight:normal;"> (~${durationMonths} ${monthsUnit})</span></div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">${decalageLabel}</div>
+            <div class="stat-value">${decalageStart}${monthUnit}<span style="font-size:0.8rem; font-weight:normal;"> ${isOver55 ? '(Over 55)' : '(Standard)'}</span></div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">${totalLabel}</div>
+            <div class="stat-value">€ ${totalGross.toFixed(2)}</div>
+          </div>
+        </div>
+
+        <div class="disclaimer-box" style="margin: 16px 0; border-left: 4px solid var(--text-main); background: var(--card-bg);">
+          <div style="font-weight: 700; margin-bottom: 4px; font-size: 0.85rem; display: flex; align-items: center; gap: 6px;">${SVG_CLOCK_BW} <span>${decorrenzaTitle}</span></div>
+          <p style="margin: 0; font-size: 0.85rem; line-height: 1.4; color: var(--text-main);">
+            ${decorrenzaText}
+          </p>
+        </div>
+
+        <h4 style="margin: 18px 0 8px 0; font-size: 0.95rem;">${projTitle}</h4>
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>${colMonth}</th>
+                <th>${colAmount}</th>
+                <th>${colStatus}</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${scheduleHtml}
+            </tbody>
+          </table>
+        </div>
+
+        <p style="margin-top:12px; font-size:0.8rem; color:var(--text-muted); font-style:italic;">
+          ${footnote}
+        </p>
+
+        <div style="margin-top:16px;">
+          <button class="button-primary" onclick="navigateTo('view-guide')">
+            ${guideBtn}
+          </button>
+        </div>
+      `;
+    }
+
+    // 4. CHECKLIST LOGIC
+    const documentsData = [
+      { id: 'doc_spid', title: 'Credenziali SPID (Livello 2) o CIE con PIN', mandatory: true, desc: 'Necessario per autenticarsi sul portale telematico www.inps.it.' },
+      { id: 'doc_iban', title: 'Codice IBAN intestato al richiedente', mandatory: true, desc: 'Conto corrente bancario o carta con IBAN intestata o cointestata.' },
+      { id: 'doc_cf', title: 'Codice Fiscale / Tessera Sanitaria', mandatory: true, desc: 'Identificativo per la posizione previdenziale.' },
+      { id: 'doc_buste', title: 'Ultime buste paga e contratto di lavoro', mandatory: true, desc: 'Utile per verificare le settimane contributive e la causale.' },
+      { id: 'doc_licenz', title: 'Lettera di licenziamento o scadenza contratto', mandatory: true, desc: 'Attestazione di cessazione involontaria.' },
+      { id: 'doc_dimiss', title: 'Atti comprovanti Dimissioni per Giusta Causa', mandatory: false, desc: 'Se applicabile: diffide, mancati pagamenti per almeno 2 mesi, o vertenza.' },
+      { id: 'doc_permesso', title: 'Permesso di Soggiorno valido (extra-UE)', mandatory: false, desc: 'Per cittadini stranieri regolarmente residenti.' }
+    ];
+
+    let currentDocFilter = 'all';
+
+    function renderDocs() {
+      const container = document.getElementById('docs-list');
+      const savedChecked = JSON.parse(localStorage.getItem('naspi_checked_docs') || '{}');
+      const currentData = getActiveDocsData();
+
+      let filtered = currentData.filter(doc => {
+        const isChecked = !!savedChecked[doc.id];
+        if (currentDocFilter === 'mandatory') return doc.mandatory;
+        if (currentDocFilter === 'missing') return !isChecked;
+        return true;
+      });
+
+      if (filtered.length === 0) {
+        const emptyMsg = currentAppLanguage === 'EN' ? 'No documents in this view.' : 'Nessun documento in questa vista.';
+        container.innerHTML = `<p style="padding:20px; text-align:center; color:var(--text-muted);">${emptyMsg}</p>`;
+        return;
+      }
+
+      const mandatoryLabel = currentAppLanguage === 'EN' ? 'MANDATORY' : 'OBBLIGATORIO';
+      const optionalLabel = currentAppLanguage === 'EN' ? 'IF APPLICABLE' : 'SE APPLICABILE';
+
+      container.innerHTML = filtered.map(doc => {
+        const isChecked = !!savedChecked[doc.id];
+        return `
+          <div class="doc-item ${isChecked ? 'checked' : ''}" onclick="toggleDoc('${doc.id}')" style="cursor:pointer;">
+            <input type="checkbox" id="${doc.id}" ${isChecked ? 'checked' : ''} onclick="event.stopPropagation(); toggleDoc('${doc.id}');" style="margin-top:4px;">
+            <div style="flex-grow:1;">
+              <div style="display:flex; justify-content:space-between; align-items:center;">
+                <strong style="font-size:0.95rem;">${doc.title}</strong>
+                <span class="feature-card-badge" style="${doc.mandatory ? 'background:var(--text-main); color:#fff;' : ''}">
+                  ${doc.mandatory ? mandatoryLabel : optionalLabel}
+                </span>
+              </div>
+              <p style="font-size:0.85rem; color:var(--text-muted); margin-top:4px;">${doc.desc}</p>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function toggleDoc(id) {
+      const savedChecked = JSON.parse(localStorage.getItem('naspi_checked_docs') || '{}');
+      savedChecked[id] = !savedChecked[id];
+      localStorage.setItem('naspi_checked_docs', JSON.stringify(savedChecked));
+      renderDocs();
+    }
+
+    // 5. TRANSLATION (IT/EN)
+    let currentAppLanguage = 'IT';
+
+    const translationsDict = {
+      IT: {
+        brand: 'NASpiFacile',
+        menu: 'Menu',
+        policy: 'Informativa Legale',
+        langCode: 'EN',
+        langTitle: 'Traduci in Inglese / Translate to English',
+        initialBadge: 'NASpiFacile',
+        initialTitle: 'Assistente Domanda Disoccupazione NASpI',
+        initialSubtitle: 'Banca dati informativa e simulatore tecnico basato su fonti ufficiali INPS',
+        initialSource: 'Fonti Ufficiali: Istituto Nazionale Previdenza Sociale (www.inps.it) • D.Lgs. 4 marzo 2015, n. 22 • Circolari Quadro n. 94/2015 e n. 142/2015 • Circolari e Messaggi di Rivalutazione Annuale Prestazioni a Sostegno del Reddito aggiornati al 2026',
+        bannerTitle: 'TERMINE PERENTORIO: 68 GIORNI',
+        bannerDesc: 'La domanda deve essere trasmessa all\'INPS entro 68 giorni dalla data di cessazione a pena di decadenza.',
+        bannerPill: 'Art. 6 D.Lgs. 22/2015',
+        decorrenzaTitle: 'Decorrenza del pagamento (Art. 6 D.Lgs. 22/2015)',
+        decorrenzaDesc: 'La NASpI spetta a partire dall\'ottavo giorno successivo alla cessazione del rapporto di lavoro, oppure dal giorno successivo alla presentazione se la domanda viene inoltrata dopo l\'ottavo giorno.',
+        legalWarningTitle: '⚠ CONDIZIONI DI UTILIZZO, PRIVACY E LIMITI DEL SERVIZIO',
+        legalWarningIntro: 'Prima di utilizzare gli strumenti di calcolo e le guide, si prega di prendere visione delle condizioni operative e di trasparenza:',
+        legalBullets: [
+          '<strong>Servizio Totalmente Gratuito & Senza Registrazione</strong>: L\'accesso all\'intero applicativo, ai simulatori e alle guide è al 100% gratuito per qualsiasi cittadino e non richiede alcuna registrazione, creazione di account, né cessione di email o credenziali.',
+          '<strong>Sostenibilità tramite Banner Pubblicitari</strong>: Il portale è un\'iniziativa divulgativa indipendente sostenuta economicamente grazie a banner pubblicitari non invasivi e brevi sponsorizzazioni video (Google Ads/AdMob). Tale modello permette di mantenere il servizio sempre aperto, aggiornato e completamente gratuito per gli utenti.',
+          '<strong>Tutela della Privacy & Elaborazione Locale</strong>: Tutti i dati inseriti nei simulatori (settimane contributive, retribuzioni, motivazioni di cessazione) vengono elaborati <strong>esclusivamente in locale nel tuo browser</strong>. Nessun dato viene archiviato, tracciato o trasmesso a database o server esterni.',
+          '<strong>Simulazione non vincolante</strong>: I calcoli e le proiezioni temporali (durata, importo mensile al 75%, décalage del 3%) hanno valore indicativo e si basano sui parametri standard di legge (D.Lgs. 22/2015 e Circolari INPS di rivalutazione aggiornate al 2026). L\'importo effettivo viene liquidato unicamente dall\'INPS a seguito di regolare istruttoria.',
+          '<strong>Inoltro ufficiale telematico</strong>: Il tool non trasmette pratiche all\'INPS. La presentazione della domanda deve essere effettuata personalmente dall\'utente su <strong>www.inps.it</strong> tramite credenziali SPID, CIE o CNS entro il termine perentorio di 68 giorni.'
+        ],
+        initialBtn: 'Ho Letto l\'Informativa • Accedi all\'Assistente →',
+        mainBadge: 'Area Operativa',
+        mainTitle: 'Servizi di Assistenza NASpI',
+        mainSubtitle: 'Seleziona una delle quattro funzionalità per procedere con la simulazione o la guida',
+        bannerTermsTitle: 'DECORRENZA E TERMINI',
+        bannerTermsDesc: 'Se presentata entro 8 giorni dalla cessazione, la NASpI decorre dall\'8° giorno. Se inviata dopo l\'8° giorno, decorre dal giorno successivo all\'invio.',
+        bannerTermsPill: 'Circolare 94/2015',
+        cardBadges: ['Verifica Art. 3', 'Parametri INPS 2026', '8 Fasi Guidate', 'Checklist Interattiva'],
+        card1Title: 'Simulare i Requisiti',
+        card1Desc: 'Verifica la sussistenza della disoccupazione involontaria e il possesso di almeno 13 settimane contributive nel quadriennio.',
+        card2Title: 'Simulare Durata e Importi',
+        card2Desc: 'Calcola le settimane di indennità (settimane / 2), l\'assegno mensile al 75% e la tabella temporale di décalage (-3%).',
+        card3Title: 'Guida Passo Passo alla Compilazione',
+        card3Desc: 'Istruzioni schermata per schermata per trasmettere la domanda online sul portale www.inps.it con SPID o CIE.',
+        card4Title: 'Documenti Necessari',
+        card4Desc: 'Checklist interattiva con documenti d\'identità, buste paga, lettere contrattuali e codice IBAN certificato.',
+        openSection: 'Apri sezione →',
+        faqSectionTitle: 'Domande Frequenti & Chiarimenti Circolari INPS',
+        faqs: [
+          {
+            q: 'Ho dato le dimissioni volontarie: ho diritto alla NASpI?',
+            a: 'No, le dimissioni ordinarie non danno diritto alla prestazione perché la disoccupazione deve essere "involontaria". Tuttavia, hai diritto alla NASpI se hai rassegnato <strong>dimissioni per giusta causa</strong> (mancato pagamento retribuzioni per almeno 2 mesi, mobbing comprovato, molestie) o durante il <strong>periodo tutelato di maternità/paternità</strong> (Art. 3 D.Lgs. 22/2015).'
+          },
+          {
+            q: 'Come e quando si applica il décalage del 3%?',
+            a: 'A decorrere dal <strong>6° mese</strong> di fruizione (91° giorno), l\'importo mensile lordo si riduce progressivamente del 3% ogni mese. Per i lavoratori che hanno compiuto <strong>55 anni</strong> alla data di cessazione del rapporto, il taglio scatta invece solo a partire dall\'<strong>8° mese</strong> (Legge 234/2021).'
+          },
+          {
+            q: 'Posso richiedere la NASpI in un\'unica soluzione per aprire partita IVA?',
+            a: 'Sì, tramite la <strong>NASpI Anticipata</strong> (Art. 8 D.Lgs. 22/2015). Se avvii un\'attività di lavoro autonomo, impresa individuale o sottoscrivi una quota di capitale in una cooperativa, puoi richiedere l\'intero importo residuo spettante in un\'unica soluzione, inoltrando la domanda entro 30 giorni dall\'inizio attività.'
+          },
+          {
+            q: 'Quali sono gli adempimenti obbligatori su piattaforma SIISL e PAD?',
+            a: '<strong>NOTA INFORMATIVA: Adempimenti obbligatori NASpI su piattaforma SIISL</strong><br><br>• <strong>Cos\'è:</strong> L\'iscrizione alla piattaforma SIISL è obbligatoria per mantenere il diritto alla disoccupazione NASpI.<br>• <strong>Cosa succede all\'inizio:</strong> Al momento dell\'accoglimento della domanda, l\'INPS ti iscrive automaticamente alla piattaforma e ti invia una notifica (SMS o e-mail). Non devi e non puoi farlo al momento dell\'inoltro della domanda.<br>• <strong>Cosa devi fare (Entro 15 giorni):</strong> Il termine di 15 giorni scatta dalla data di accoglimento/decorrenza della NASpI (non dall\'inoltro). Entro questo termine devi accedere al sito SIISL tramite SPID o CIE per:<ul style="margin: 6px 0 6px 20px;"><li>Sottoscrivere il PAD (Patto di Attivazione Digitale).</li><li>Inserire o aggiornare il tuo Curriculum Vitae (CV).</li></ul>• <strong>Fase finale:</strong> Successivamente verrai contattato dal tuo Centro per l\'Impiego (CPI) per firmare il Patto di Servizio Personalizzato.<br>• <strong>Sanzioni:</strong> Se non completi la procedura online o non ti presenti al CPI senza giustificato motivo rischi la sospensione o la perdita della NASpI.'
+          },
+          {
+            q: 'Comunicazioni NASpI (NASpI-Com): quando inviarlo e regole sul reddito?',
+            a: '<strong>NOTA INFORMATIVA: Quando inviare il modello NASpI-Com e regole sul reddito</strong><br><br>Il modello NASpI-Com serve a comunicare all\'INPS qualsiasi variazione durante la disoccupazione. Va inviato obbligatoriamente <strong>entro 30 giorni</strong> dall\'evento.<br><br><div style="background: #FDE8E8; border: 1.2px solid #C53030; border-radius: 6px; padding: 10px; margin: 8px 0; color: #9B1C1C; font-weight: 700;">REGOLA ASSOLUTA: Il modello NASpI-Com va sempre e comunque inviato in caso di qualsiasi ripresa di attività lavorativa (anche per un solo giorno, anche se il reddito è minimo o pari a zero, e anche se l\'azienda effettua già le comunicazioni obbligatorie).</div><strong>Casi di invio obbligatorio (Entro 30 giorni):</strong><ul style="margin: 8px 0 8px 20px;"><li><strong>Nuovo lavoro dipendente o autonomo:</strong> Per comunicare l\'inizio dell\'attività e il reddito annuo presunto.</li><li><strong>Variazione del reddito:</strong> Se cambia il reddito presunto già dichiarato in precedenza.</li><li><strong>Eventi previdenziali o personali:</strong> Inizio di malattia, maternità, infortunio, espatrio o rinuncia alla NASpI.</li></ul>'
+          }
+        ],
+        transparencyTitle: 'Nota di Trasparenza',
+        transparencyDesc: 'Questo applicativo ad accesso libero garantisce la massima riservatezza. I dati rimangono sul tuo dispositivo locale.',
+        
+        // Requirements
+        reqBadge: 'Modulo 1 • Requisiti',
+        reqTitle: 'Simulatore Requisiti NASpI',
+        reqSubtitle: 'Verifica immediata dell\'idoneità legale in base all\'art. 3 del D.Lgs. 22/2015',
+        reqCessationLabel: '1. Motivo della Cessazione del Lavoro:',
+        reqCessationOptions: [
+          'Licenziamento per Giustificato Motivo Oggettivo / Economico (Ammesso)',
+          'Licenziamento Disciplinare / Giusta Causa (Ammesso - Circolare 94/2015)',
+          'Scadenza naturale Contratto a Termine / Stagionale (Ammesso)',
+          'Dimissioni per Giusta Causa - Mancati stipendi, mobbing (Ammesso)',
+          'Risoluzione Consensuale presso Ispettorato Territoriale Lavoro - ITL (Ammesso)',
+          'Dimissioni nel periodo tutelato di Maternità/Paternità (Ammesso)',
+          'Dimissioni Volontarie Ordinarie (NON AMMESSO)',
+          'Risoluzione Consensuale Privata senza conciliazione ITL (NON AMMESSO)'
+        ],
+        reqWeeksLabel: '2. Settimane di Contributi nei 4 Anni Precedenti (Minimo 13):',
+        reqWeeksMin: '0 sett.',
+        reqWeeksMax: '208 sett. (4 anni)',
+        reqDeclLabel: '3. Dichiarazioni e Condizioni Aggiuntive:',
+        reqDidLabel: 'Disponibile a rilasciare la DID (Dichiarazione di Immediata Disponibilità al lavoro)',
+        reqNoPensionLabel: 'Non titolare di pensione diretta (Vecchiaia, Anticipata o Quota 103)',
+        
+        // Amounts
+        amountsBadge: 'Modulo 2 • Calcolo',
+        amountsTitle: 'Simulatore Durata e Importi',
+        amountsSubtitle: 'Parametri e massimali aggiornati secondo le ultime disposizioni e circolari ufficiali INPS 2026',
+        amountsDisclaimer: 'Il calcolo della nuova indennità si baserà esclusivamente sui contributi e sugli stipendi del tuo ultimo rapporto di lavoro (o comunque sui periodi lavorativi successivi a una precedente domanda); altrimenti si va a calcolare sulla media dello stipendio mensile lordo fino a quattro anni indietro.',
+        amountsSalaryLabel: 'Retribuzione Media Mensile Lorda Ultimi 4 Anni (€):',
+        amountsSalaryHelp: 'Soglia di riferimento per il 2026: 1.456,72 € • Tetto massimo mensile erogabile: 1.584,70 € (Parametri INPS 2026)',
+        amountsPrincipleTitle: 'Come si calcola l\'importo',
+        amountsPrincipleMain: 'L\'importo della NASpI è pari al 75% della retribuzione media mensile degli ultimi quattro anni se lo stipendio medio è inferiore a 1.456,72 euro (cifra di riferimento per il 2026), fino a un massimo di 1.584,70 euro al mese.',
+        amountsPrincipleIntro: 'Il calcolo cambia in base alla media dei tuoi stipendi degli ultimi 4 anni:',
+        amountsPrincipleLow: '<strong>Stipendio basso o medio (fino a 1.456,72 €)</strong>: Prendi il 75% della tua retribuzione media.',
+        amountsPrincipleHigh: '<strong>Stipendio alto (oltre 1.456,72 €)</strong>: Prendi il 75% di 1.456,72 euro più il 25% della differenza tra il tuo stipendio medio e 1.456,72 euro.',
+        amountsPrincipleMax: '<strong>Limite massimo</strong>: L\'assegno non può comunque superare il massimale di 1.584,70 euro al mese per il 2026.',
+        amountsWeeksLabel: 'Settimane di Contribuzione nel Quadriennio (Senza contributi accreditati ad altra prestazione):',
+        amountsWeeksMin: '13 sett.',
+        amountsWeeksMax: '208 sett. (4 anni)',
+        amountsOver55Label: 'Lavoratore Over 55 (Almeno 55 anni compiuti alla data di cessazione)',
+        amountsOver55Help: 'In base alla Legge 234/2021, per gli Over 55 il taglio del 3% decorre dall\'8° mese invece che dal 6°.',
+        
+        // Guide
+        guideBadge: 'Modulo 3 • Portale',
+        guideTitle: 'Guida Passo Passo alla Domanda',
+        guideSubtitle: 'Procedura ufficiale di trasmissione online su www.inps.it con SPID o CIE',
+        guideBannerTitle: 'ACCESSO AUTONOMO',
+        guideBannerDesc: 'La domanda può essere inviata 24 ore su 24 accedendo all\'area MyINPS con le proprie credenziali digitali.',
+        guideBannerPill: 'MyINPS',
+        guideSteps: [
+          {
+            phase: 'FASE 1 DI 8',
+            cat: 'Autenticazione',
+            title: 'Accesso all\'Identità Digitale',
+            desc: 'Collegati al portale ufficiale <strong>www.inps.it</strong> e clicca in alto a destra su <em>"Entra in MyINPS"</em>.',
+            path: 'Home > Entra in MyINPS > SPID / CIE / CNS',
+            tips: ['SPID di Livello 2 (PosteID, Aruba, InfoCert, Sielte, etc.)', 'CIE (Carta di Identità Elettronica 3.0) con PIN e app CieID', 'I vecchi codici PIN INPS non sono più validi per i cittadini.']
+          },
+          {
+            phase: 'FASE 2 DI 8',
+            cat: 'Ricerca Servizio',
+            title: 'Ricerca del Servizio NASpI',
+            desc: 'Nella barra di ricerca principale digita <em>"NASpI: indennità mensile di disoccupazione"</em> e seleziona il servizio.',
+            path: 'Prestazioni e Servizi > NASpI: indennità mensile > Nuova Domanda',
+            tips: ['Clicca su "Utilizza il servizio" e seleziona il profilo "Cittadino"', 'Nel menu a sinistra fai clic su "Nuova Domanda"']
+          },
+          {
+            phase: 'FASE 3 DI 8',
+            cat: 'Anagrafica',
+            title: 'Verifica Dati Anagrafici e Recapiti',
+            desc: 'Controlla l\'esattezza dell\'indirizzo di residenza, inserisci un numero di cellulare attivo e l\'indirizzo email per ricevere gli SMS di notifica INPS sull\'avanzamento.',
+            path: '',
+            tips: []
+          },
+          {
+            phase: 'FASE 4 DI 8',
+            cat: 'Rapporto di Lavoro',
+            title: 'Dati Ultimo Lavoro e Motivo Fine Rapporto',
+            desc: 'Inserisci la data esatta dell\'ultimo giorno lavorato e seleziona la motivazione conforme ai tuoi documenti (Licenziamento, Scadenza termine o Dimissioni per giusta causa).',
+            path: '',
+            tips: []
+          },
+          {
+            phase: 'FASE 5 DI 8',
+            cat: 'Pagamento',
+            title: 'Coordinate di Pagamento (IBAN)',
+            desc: 'Inserisci il codice IBAN del tuo conto corrente bancario, postale o carta conto abilitata.',
+            path: 'ATTENZIONE: L\'IBAN deve essere intestato o cointestato al richiedente.',
+            tips: []
+          },
+          {
+            phase: 'FASE 6 DI 8',
+            cat: 'DID & Redditi',
+            title: 'Dichiarazione DID e Redditi Presunti',
+            desc: 'La dichiarazione di immediata disponibilità al lavoro (DID) è integrata nel modello telematico. Indica se prevedi redditi da lavoro autonomo o occasionale nel corso dell\'anno solare.',
+            path: '',
+            tips: []
+          },
+          {
+            phase: 'FASE 7 DI 8',
+            cat: 'Invio Pratica',
+            title: 'Riepilogo e Invio Telematico',
+            desc: 'Rivedi attentamente tutti i campi, conferma la veridicità delle dichiarazioni e clicca su <em>"Invia Domanda"</em>. <strong>Scarica e salva il file PDF della ricevuta con il numero di protocollo INPS</strong>.',
+            path: '',
+            tips: []
+          },
+          {
+            phase: 'FASE 8 DI 8',
+            cat: 'SIISL & Centro Impiego',
+            title: 'Piattaforma SIISL e Attivazione al Centro per l\'Impiego',
+            desc: 'Adempimenti obbligatori per mantenere il diritto all\'indennità: attivazione sulla piattaforma SIISL e stipula del Patto di Servizio.',
+            path: '',
+            tips: []
+          }
+        ],
+        siislBadge: 'NOTA INFORMATIVA',
+        siislPlatform: 'Piattaforma SIISL',
+        siislTitle: 'Adempimenti obbligatori NASpI su piattaforma SIISL',
+        siislContent: `
+          <p style="margin-bottom: 10px;"><strong>• Cos'è:</strong> L'iscrizione alla piattaforma SIISL è obbligatoria per mantenere il diritto alla disoccupazione NASpI.</p>
+          <p style="margin-bottom: 10px;"><strong>• Cosa succede all'inizio:</strong> Al momento dell'accoglimento della domanda, l'INPS ti iscrive automaticamente alla piattaforma e ti invia una notifica (SMS o e-mail). Non devi e non puoi farlo al momento dell'inoltro della domanda.</p>
+          <p style="margin-bottom: 10px;"><strong>• Cosa devi fare (Entro 15 giorni):</strong> Il termine di 15 giorni scatta dalla data di accoglimento/decorrenza della NASpI (non dall'inoltro). Entro questo termine devi accedere al sito SIISL tramite SPID o CIE per:</p>
+          <ul style="margin: 6px 0 12px 24px;">
+            <li>Sottoscrivere il PAD (Patto di Attivazione Digitale).</li>
+            <li>Inserire o aggiornare il tuo Curriculum Vitae (CV).</li>
+          </ul>
+          <p style="margin-bottom: 12px;"><strong>• Fase finale:</strong> Successivamente verrai contattato dal tuo Centro per l'Impiego (CPI) per firmare il Patto di Servizio Personalizzato.</p>
+          <div style="background: #FDE8E8; border: 1.2px solid #C53030; border-radius: 6px; padding: 12px; margin-top: 10px; color: #9B1C1C; font-weight: 600;">
+            ⚠ Sanzioni: Se non completi la procedura online o non ti presenti al CPI senza giustificato motivo rischi la sospensione o la perdita della NASpI.
+          </div>
+        `,
+        
+        // PDF Card
+        pdfBadge: 'DOCUMENTO PDF',
+        pdfPages: '23 Pagine • Formato Editoriale',
+        pdfTitle: 'Manuale Ufficiale Schermata per Schermata',
+        pdfDesc: 'Visualizza la guida in formato PDF impaginata con le ricostruzioni grafiche di tutte le schermate INPS e le note operative.',
+        pdfBtn: 'Apri PDF (23 Pagine)',
+
+        // Documents
+        docsBadge: 'Modulo 4 • Checklist',
+        docsTitle: 'Documenti Necessari per la Domanda',
+        docsSubtitle: 'Checklist interattiva: spunta i documenti già pronti (salvati in memoria nel browser)',
+        docsFilterAll: 'Tutti i Documenti',
+        docsFilterMandatory: 'Solo Obbligatori',
+        docsFilterMissing: 'Da Reperire',
+        
+        // Footer & common
+        footerLine1: 'Banca Dati Normativa INPS • D.Lgs. 22/2015',
+        footerLine2: 'Circolari e Fonti Ufficiali INPS: Aggiornate al 2026 • NASpiFacile',
+        backToMenu: '← Torna al Menu Principale',
+        backBtn: '← Torna al Menu',
+
+        // Ads & Video Ad
+        videoAdBadge: 'SPONSOR • VIDEO',
+        videoAdTitle: 'Video Sponsorizzato',
+        videoAdDesc: 'Guarda il breve video per sbloccare la Guida PDF Ufficiale INPS (23 Pagine)',
+        videoAdSponsor: 'Partner Ufficiale Servizi Lavoro • Video Spot',
+        videoAdUnlockIn: 'Sblocco risorsa tra: ',
+        videoAdSkip: 'Salta / Chiudi',
+        videoAdUnlocked: '✓ Risorsa Sbloccata con Successo!',
+        videoAdDownloadBtn: 'Scarica e Apri PDF →',
+        adBannerPlaceholder: 'Spazio Pubblicitario • Banner Standard (Google AdSense / Ads)',
+        adNotice: 'Annuncio Pubblicitario',
+        footerPolicyLink: 'Policy e Privacy',
+        modalPolicyHeader: 'Condizioni di Utilizzo, Privacy & Trasparenza',
+        modalPolicyCloseBtn: 'Ho Letto e Compreso • Chiudi Finestra',
+        reopenPolicyCardTitle: 'Condizioni di Utilizzo, Privacy & Disclaimer',
+        reopenPolicyCardSub: '100% Gratuito • Sostenuto da Ads • Privacy Locale (Clicca per riaprire)',
+        reopenPolicyCardBtn: 'Apri Finestra →',
+        initialCloseBtnText: 'Chiudi Finestra ✕',
+        bannerFixedTitle: 'Non Sostituzione a Enti Professionali',
+        bannerFixedSub: 'Il presente applicativo è un supporto informativo e divulgativo. Esso NON si sostituisce in alcun modo a:',
+        bannerFixedB1: 'Centri di Assistenza Fiscale (CAF)',
+        bannerFixedB2: 'Istituti di Patronato riconosciuti dalla legge',
+        bannerFixedB3: 'Consulenti del Lavoro o professionisti abilitati',
+        bannerFixedB4: 'Sportelli ufficiali dell\'INPS o canali Contact Center'
+      },
+      EN: {
+        brand: 'NASpiFacile',
+        menu: 'Menu',
+        policy: 'Legal Notice',
+        langCode: 'IT',
+        langTitle: 'Passa alla lingua italiana / Switch to Italian',
+        initialBadge: 'NASpiFacile',
+        initialTitle: 'NASpI Unemployment Application Assistant',
+        initialSubtitle: 'Information database and technical simulator based on official INPS sources',
+        initialSource: 'Official Sources: National Social Security Institute (www.inps.it) • Legislative Decree March 4, 2015, n. 22 • Framework Circulars n. 94/2015 & n. 142/2015 • Annual Income Support Revaluation Circulars updated to 2026',
+        bannerTitle: 'MANDATORY DEADLINE: 68 DAYS',
+        bannerDesc: 'The application must be submitted to INPS within 68 days of employment termination, under penalty of forfeiture.',
+        bannerPill: 'Art. 6 D.Lgs. 22/2015',
+        decorrenzaTitle: 'Effective Date of Payment (Art. 6 D.Lgs. 22/2015)',
+        decorrenzaDesc: 'NASpI is payable starting from the 8th day following employment termination, or from the day following submission if filed after the 8th day.',
+        legalWarningTitle: '⚠ TERMS OF USE, PRIVACY & LEGAL DISCLAIMER',
+        legalWarningIntro: 'Before using the calculation tools and filing guides, please review the operating terms and transparency notice:',
+        legalBullets: [
+          '<strong>100% Free & No Registration Required</strong>: Access to the entire platform, simulation tools, and guides is completely free for all citizens and does not require any account creation, login, or personal data submission.',
+          '<strong>Sustainability through Advertising</strong>: This independent initiative is funded and sustained through non-intrusive standard banner ads and short sponsored video clips (Google Ads/AdMob). This model guarantees free, continuous access and up-to-date legal databases at no cost to users.',
+          '<strong>Privacy Protection & Local Processing</strong>: All data entered into the calculators (contribution weeks, salary amounts, termination reasons) is processed <strong>strictly locally within your browser</strong>. No information is recorded, tracked, or sent to external servers.',
+          '<strong>Indicative & Non-Binding Simulations</strong>: Calculations and timelines (duration, 75% gross allowance, progressive 3% reduction) are purely indicative based on statutory guidelines (D.Lgs. 22/2015 and INPS revaluations updated to 2026). Final approval and official benefit amounts are determined solely by INPS after formal review.',
+          '<strong>Exclusive Electronic Filing on INPS.it</strong>: This application does not transmit applications to INPS. Claims must be submitted directly and personally by the user on <strong>www.inps.it</strong> with SPID, CIE, or CNS credentials within the mandatory 68-day deadline.'
+        ],
+        initialBtn: 'I Read the Legal Notice • Enter the Assistant →',
+        mainBadge: 'Operational Area',
+        mainTitle: 'NASpI Assistance Services',
+        mainSubtitle: 'Select one of the four features to proceed with simulation or guide',
+        bannerTermsTitle: 'EFFECTIVE DATE & DEADLINES',
+        bannerTermsDesc: 'If submitted within 8 days of termination, NASpI starts from the 8th day. If submitted after the 8th day, it starts from the day following submission.',
+        bannerTermsPill: 'Circular 94/2015',
+        cardBadges: ['Verify Art. 3', 'INPS 2026 Rules', '8 Guided Steps', 'Interactive Checklist'],
+        card1Title: 'Simulate Requirements',
+        card1Desc: 'Check involuntary unemployment status and at least 13 contribution weeks in the 4-year period.',
+        card2Title: 'Simulate Duration & Amounts',
+        card2Desc: 'Calculate benefit weeks (weeks / 2), 75% gross monthly allowance, and progressive 3% reduction schedule.',
+        card3Title: 'Step-by-Step Filing Guide',
+        card3Desc: 'Screen-by-screen guidance to submit your online application on www.inps.it with SPID or CIE.',
+        card4Title: 'Required Documents',
+        card4Desc: 'Interactive checklist with identity documents, payslips, contract termination letters, and verified IBAN.',
+        openSection: 'Open section →',
+        faqSectionTitle: 'Frequently Asked Questions & Official INPS Circulars',
+        faqs: [
+          {
+            q: 'I voluntarily resigned: am I entitled to NASpI?',
+            a: 'No, ordinary voluntary resignation does not entitle you to NASpI because unemployment must be "involuntary". However, you are entitled to NASpI if you resigned for <strong>just cause</strong> (unpaid wages for at least 2 months, proven mobbing, harassment) or during the <strong>protected maternity/paternity period</strong> (Art. 3 D.Lgs. 22/2015).'
+          },
+          {
+            q: 'How and when does the 3% progressive reduction apply?',
+            a: 'Starting from the <strong>6th month</strong> of benefit (91st day), the gross monthly amount decreases progressively by 3% each month. For workers aged <strong>55 or older</strong> on the date of employment termination, the reduction begins only from the <strong>8th month</strong> (Law 234/2021).'
+          },
+          {
+            q: 'Can I claim NASpI as a lump sum to start a business or self-employment?',
+            a: 'Yes, through <strong>Advance NASpI</strong> (Art. 8 D.Lgs. 22/2015). If you start a self-employed activity, sole proprietorship, or subscribe capital to a cooperative, you can claim the entire remaining benefit amount in a single lump sum by filing within 30 days of business start.'
+          },
+          {
+            q: 'What are the mandatory requirements on the SIISL platform and PAD?',
+            a: '<strong>INFORMATIVE NOTE: Mandatory NASpI Obligations on SIISL Platform</strong><br><br>• <strong>What it is:</strong> Registration on the SIISL platform is mandatory to maintain entitlement to NASpI unemployment benefits.<br>• <strong>What happens at the beginning:</strong> When the claim is approved, INPS automatically registers you on the platform and notifies you (SMS or email). You do not and cannot register during initial claim submission.<br>• <strong>What you must do (Within 15 days):</strong> The 15-day window starts from the date of NASpI approval/start date (not from application filing). Within this window, you must log in to SIISL using SPID or CIE to:<ul style="margin: 6px 0 6px 20px;"><li>Sign the PAD (Digital Activation Pact).</li><li>Enter or update your Curriculum Vitae (CV).</li></ul>• <strong>Final phase:</strong> You will subsequently be contacted by your local Employment Center (CPI) to sign the Personalized Service Agreement.<br>• <strong>Sanctions:</strong> Failing to complete the online procedure or not appearing at the CPI without justified reason may lead to suspension or forfeiture of NASpI.'
+          },
+          {
+            q: 'NASpI Communications (NASpI-Com): when to submit and income rules?',
+            a: '<strong>INFORMATIVE NOTE: When to submit the NASpI-Com model and income rules</strong><br><br>The NASpI-Com form is used to notify INPS of any change during unemployment. It must be sent mandatorily <strong>within 30 days</strong> of the event.<br><br><div style="background: #FDE8E8; border: 1.2px solid #C53030; border-radius: 6px; padding: 10px; margin: 8px 0; color: #9B1C1C; font-weight: 700;">ABSOLUTE RULE: The NASpI-Com form must ALWAYS be submitted whenever work resumes (even for just a single day, even if income is minimal or zero, and even if the employer already filed mandatory communications).</div><strong>Mandatory submission cases (Within 30 days):</strong><ul style="margin: 8px 0 8px 20px;"><li><strong>New employee or self-employed job:</strong> To declare activity start and estimated annual income.</li><li><strong>Income changes:</strong> If previously declared estimated income changes.</li><li><strong>Social security or personal events:</strong> Onset of illness, maternity, injury, moving abroad, or waiver of NASpI.</li></ul>'
+          }
+        ],
+        transparencyTitle: 'Transparency Notice',
+        transparencyDesc: 'This independent informational service is open-access. Data remains strictly private on your local computer.',
+        
+        // Requirements
+        reqBadge: 'Module 1 • Eligibility',
+        reqTitle: 'NASpI Eligibility Simulator',
+        reqSubtitle: 'Immediate legal check based on Art. 3 of Legislative Decree 22/2015',
+        reqCessationLabel: '1. Reason for Employment Termination:',
+        reqCessationOptions: [
+          'Dismissal for Objective Justified Reason / Economic (Allowed)',
+          'Disciplinary Dismissal / Just Cause (Allowed - Circular 94/2015)',
+          'Natural Expiration of Fixed-Term / Seasonal Contract (Allowed)',
+          'Resignation for Just Cause - Unpaid wages, mobbing (Allowed)',
+          'Consensual Termination at Territorial Labor Inspectorate - ITL (Allowed)',
+          'Resignation during protected Maternity/Paternity period (Allowed)',
+          'Ordinary Voluntary Resignation (NOT ALLOWED)',
+          'Private Consensual Termination without ITL conciliation (NOT ALLOWED)'
+        ],
+        reqWeeksLabel: '2. Contribution Weeks in Past 4 Years (Minimum 13):',
+        reqWeeksMin: '0 weeks',
+        reqWeeksMax: '208 weeks (4 years)',
+        reqDeclLabel: '3. Additional Declarations and Conditions:',
+        reqDidLabel: 'Available to issue DID (Immediate Availability for Work Declaration)',
+        reqNoPensionLabel: 'Not recipient of direct retirement pension (Old age, Early, or Quota 103)',
+        
+        // Amounts
+        amountsBadge: 'Module 2 • Calculation',
+        amountsTitle: 'Duration and Amount Simulator',
+        amountsSubtitle: 'Parameters and ceilings updated according to official INPS 2026 circulars',
+        amountsDisclaimer: 'The calculation of the new indemnity will be based exclusively on the contributions and salaries of your last employment relationship (or in any case on working periods subsequent to a previous application); otherwise, it is calculated on the average monthly gross salary up to four years back.',
+        amountsSalaryLabel: 'Average Gross Monthly Salary in Past 4 Years (€):',
+        amountsSalaryHelp: 'Reference benchmark for 2026: € 1,456.72 • Maximum monthly benefit cap: € 1,584.70 (INPS 2026 Parameters)',
+        amountsPrincipleTitle: 'How the Amount is Calculated',
+        amountsPrincipleMain: 'The NASpI amount equals 75% of the average monthly gross salary over the past four years if the average salary is below € 1,456.72 (reference benchmark for 2026), up to a maximum ceiling of € 1,584.70 per month.',
+        amountsPrincipleIntro: 'The calculation varies depending on your average earnings over the past 4 years:',
+        amountsPrincipleLow: '<strong>Low or medium salary (up to € 1,456.72)</strong>: You get 75% of your average salary.',
+        amountsPrincipleHigh: '<strong>High salary (over € 1,456.72)</strong>: You get 75% of € 1,456.72 plus 25% of the difference between your average salary and € 1,456.72.',
+        amountsPrincipleMax: '<strong>Maximum ceiling</strong>: In any case, the benefit cannot exceed the maximum cap of € 1,584.70 per month for 2026.',
+        amountsWeeksLabel: 'Contribution Weeks in the 4-Year Period (Excluding weeks credited to other benefits):',
+        amountsWeeksMin: '13 weeks',
+        amountsWeeksMax: '208 weeks (4 years)',
+        amountsOver55Label: 'Worker Over 55 (At least 55 years of age on termination date)',
+        amountsOver55Help: 'Under Law 234/2021, for Over 55 workers the 3% reduction starts from the 8th month instead of the 6th.',
+        
+        // Guide
+        guideBadge: 'Module 3 • INPS Portal',
+        guideTitle: 'Step-by-Step Application Guide',
+        guideSubtitle: 'Official online submission procedure on www.inps.it with SPID or CIE',
+        guideBannerTitle: 'AUTONOMOUS ACCESS',
+        guideBannerDesc: 'The application can be submitted 24/7 by accessing the MyINPS area with your digital credentials.',
+        guideBannerPill: 'MyINPS',
+        guideSteps: [
+          {
+            phase: 'PHASE 1 OF 8',
+            cat: 'Authentication',
+            title: 'Digital Identity Access',
+            desc: 'Go to the official portal <strong>www.inps.it</strong> and click in the top right on <em>"Enter MyINPS"</em>.',
+            path: 'Home > Enter MyINPS > SPID / CIE / CNS',
+            tips: ['Level 2 SPID (PosteID, Aruba, InfoCert, Sielte, etc.)', 'CIE (Electronic ID Card 3.0) with PIN and CieID app', 'Old INPS PIN codes are no longer valid for citizens.']
+          },
+          {
+            phase: 'PHASE 2 OF 8',
+            cat: 'Search Service',
+            title: 'Search the NASpI Service',
+            desc: 'In the main search bar, type <em>"NASpI: monthly unemployment allowance"</em> and select the electronic service.',
+            path: 'Services & Benefits > NASpI: monthly allowance > New Application',
+            tips: ['Click on "Use the service" and select the "Citizen" profile', 'In the left menu, click on "New Application"']
+          },
+          {
+            phase: 'PHASE 3 OF 8',
+            cat: 'Personal Details',
+            title: 'Verify Personal Details and Contacts',
+            desc: 'Check the accuracy of your residential address, enter an active mobile phone number and email address to receive INPS SMS status notifications.',
+            path: '',
+            tips: []
+          },
+          {
+            phase: 'PHASE 4 OF 8',
+            cat: 'Employment Relationship',
+            title: 'Last Job Details & Termination Reason',
+            desc: 'Enter the exact last worked day and select the termination reason matching your documents (Dismissal, Expiration, or Resignation for just cause).',
+            path: '',
+            tips: []
+          },
+          {
+            phase: 'PHASE 5 OF 8',
+            cat: 'Payment Method',
+            title: 'Payment Details (IBAN)',
+            desc: 'Enter the IBAN code of your bank account, postal account, or enabled card.',
+            path: 'WARNING: The IBAN must be in the applicant\'s name or co-owned.',
+            tips: []
+          },
+          {
+            phase: 'PHASE 6 OF 8',
+            cat: 'DID & Income',
+            title: 'DID Declaration & Expected Income',
+            desc: 'The immediate availability declaration (DID) is integrated into the digital form. Indicate whether you expect any self-employment or occasional income during the calendar year.',
+            path: '',
+            tips: []
+          },
+          {
+            phase: 'PHASE 7 OF 8',
+            cat: 'Application Submission',
+            title: 'Summary & Electronic Submission',
+            desc: 'Review all fields carefully, confirm the accuracy of declarations, and click <em>"Submit Application"</em>. <strong>Download and save the receipt PDF with the INPS protocol number</strong>.',
+            path: '',
+            tips: []
+          },
+          {
+            phase: 'PHASE 8 OF 8',
+            cat: 'SIISL & Employment Center',
+            title: 'SIISL Platform & Employment Center Activation',
+            desc: 'Mandatory obligations to maintain benefit entitlement: activation on the SIISL platform and signing the Personalized Service Agreement.',
+            path: '',
+            tips: []
+          }
+        ],
+        siislBadge: 'INFORMATIVE NOTE',
+        siislPlatform: 'SIISL Platform',
+        siislTitle: 'Mandatory NASpI Obligations on SIISL Platform',
+        siislContent: `
+          <p style="margin-bottom: 10px;"><strong>• What it is:</strong> Registration on the SIISL platform is mandatory to maintain entitlement to NASpI unemployment benefits.</p>
+          <p style="margin-bottom: 10px;"><strong>• What happens at the beginning:</strong> When the claim is approved, INPS automatically registers you on the platform and notifies you (SMS or email). You do not and cannot register during initial claim submission.</p>
+          <p style="margin-bottom: 10px;"><strong>• What you must do (Within 15 days):</strong> The 15-day window starts from the date of NASpI approval/start date (not from application filing). Within this window, you must log in to SIISL using SPID or CIE to:</p>
+          <ul style="margin: 6px 0 12px 24px;">
+            <li>Sign the PAD (Digital Activation Pact).</li>
+            <li>Enter or update your Curriculum Vitae (CV).</li>
+          </ul>
+          <p style="margin-bottom: 12px;"><strong>• Final phase:</strong> You will subsequently be contacted by your local Employment Center (CPI) to sign the Personalized Service Agreement.</p>
+          <div style="background: #FDE8E8; border: 1.2px solid #C53030; border-radius: 6px; padding: 12px; margin-top: 10px; color: #9B1C1C; font-weight: 600;">
+            ⚠ Sanctions: Failing to complete the online procedure or not appearing at the CPI without justified reason may lead to suspension or forfeiture of NASpI.
+          </div>
+        `,
+        
+        // PDF Card
+        pdfBadge: 'PDF DOCUMENT',
+        pdfPages: '23 Pages • Editorial Format',
+        pdfTitle: 'Official Manual Screen by Screen',
+        pdfDesc: 'View the guide in PDF format featuring graphical reconstructions of all INPS screens and operational guidelines.',
+        pdfBtn: 'Open PDF (23 Pages)',
+
+        // Documents
+        docsBadge: 'Module 4 • Checklist',
+        docsTitle: 'Required Documents for Application',
+        docsSubtitle: 'Interactive checklist: check the documents already prepared (saved in browser storage)',
+        docsFilterAll: 'All Documents',
+        docsFilterMandatory: 'Mandatory Only',
+        docsFilterMissing: 'To Find',
+        
+        // Footer & common
+        footerLine1: 'INPS Regulatory Database • Legislative Decree 22/2015',
+        footerLine2: 'Official INPS Circulars and Sources: Updated to 2026 • NASpiFacile',
+        backToMenu: '← Back to Main Menu',
+        backBtn: '← Back to Menu',
+
+        // Ads & Video Ad
+        videoAdBadge: 'SPONSOR • VIDEO',
+        videoAdTitle: 'Sponsored Video',
+        videoAdDesc: 'Watch the short video to unlock the Official INPS PDF Guide (23 Pages)',
+        videoAdSponsor: 'Official Employment Services Partner • Video Ad',
+        videoAdUnlockIn: 'Unlocking resource in: ',
+        videoAdSkip: 'Skip / Close',
+        videoAdUnlocked: '✓ Resource Successfully Unlocked!',
+        videoAdDownloadBtn: 'Download and Open PDF →',
+        adBannerPlaceholder: 'Ad Space • Standard Banner (Google AdSense / Ads)',
+        adNotice: 'Advertisement',
+        footerPolicyLink: 'Policy & Privacy',
+        modalPolicyHeader: 'Terms of Use, Privacy & Legal Disclaimer',
+        modalPolicyCloseBtn: 'I Have Read & Understood • Close Window',
+        reopenPolicyCardTitle: 'Terms of Use, Privacy & Legal Disclaimer',
+        reopenPolicyCardSub: '100% Free • Ad Supported • Local Privacy (Click to reopen)',
+        reopenPolicyCardBtn: 'Open Window →',
+        initialCloseBtnText: 'Close Window ✕',
+        bannerFixedTitle: 'Not a Replacement for Professional Entities',
+        bannerFixedSub: 'This application is an informational and technical guidance tool. It does NOT in any way replace:',
+        bannerFixedB1: 'Tax Assistance Centers (CAF)',
+        bannerFixedB2: 'Legally recognized Labor Patronati and Social Security Institutes',
+        bannerFixedB3: 'Certified Labor Consultants or qualified legal professionals',
+        bannerFixedB4: 'Official INPS public service desks or Contact Center channels'
+      }
+    };
+
+    const documentsDataEn = [
+      { id: 'doc_spid', title: 'SPID Credentials (Level 2) or CIE with PIN', mandatory: true, desc: 'Required to log into the online portal www.inps.it.' },
+      { id: 'doc_iban', title: 'IBAN Code under applicant\'s name', mandatory: true, desc: 'Bank current account or prepaid card with registered IBAN.' },
+      { id: 'doc_cf', title: 'Tax Code (Codice Fiscale) / Health Card', mandatory: true, desc: 'Identifier for your social security record.' },
+      { id: 'doc_buste', title: 'Recent payslips and employment contract', mandatory: true, desc: 'Useful to verify contribution weeks and termination reason.' },
+      { id: 'doc_licenz', title: 'Termination letter or contract expiration', mandatory: true, desc: 'Proof of involuntary termination.' },
+      { id: 'doc_dimiss', title: 'Proof of resignation for just cause', mandatory: false, desc: 'If applicable: formal notice, unpaid wages for 2+ months, or labor dispute.' },
+      { id: 'doc_permesso', title: 'Valid Residence Permit (non-EU)', mandatory: false, desc: 'For regular foreign resident citizens.' }
+    ];
+
+    function toggleLanguage() {
+      currentAppLanguage = currentAppLanguage === 'IT' ? 'EN' : 'IT';
+      applyLanguage(currentAppLanguage);
+    }
+
+    function applyLanguage(lang) {
+      const t = translationsDict[lang];
+      document.documentElement.lang = lang.toLowerCase();
+
+      // Top bar
+      const brandEl = document.getElementById('app-brand-text');
+      if (brandEl) brandEl.textContent = t.brand;
+      const langBtnLabel = document.getElementById('lang-code-label');
+      if (langBtnLabel) langBtnLabel.textContent = t.langCode;
+      const langBtn = document.getElementById('btn-lang-toggle');
+      if (langBtn) langBtn.title = t.langTitle;
+      const navMenu = document.getElementById('nav-btn-menu');
+      if (navMenu) navMenu.textContent = t.menu;
+      const navPolicy = document.getElementById('nav-btn-policy');
+      if (navPolicy) navPolicy.textContent = t.policy;
+
+      // 1. Initial View
+      const initBadge = document.querySelector('#view-initial .app-brand-badge');
+      if (initBadge) initBadge.textContent = t.initialBadge;
+      const initH1 = document.querySelector('#view-initial h1');
+      if (initH1) initH1.textContent = t.initialTitle;
+      const initSub = document.querySelector('#view-initial .subtitle');
+      if (initSub) initSub.textContent = t.initialSubtitle;
+      const initSrc = document.querySelector('#view-initial .source-text');
+      if (initSrc) initSrc.textContent = t.initialSource;
+      
+      const bannerInitH2 = document.querySelector('#view-initial .hero-banner h2');
+      if (bannerInitH2) bannerInitH2.textContent = t.bannerTitle;
+      const bannerInitP = document.querySelector('#view-initial .hero-banner p');
+      if (bannerInitP) bannerInitP.textContent = t.bannerDesc;
+      const bannerInitPill = document.querySelector('#view-initial .hero-banner .hero-pill');
+      if (bannerInitPill) bannerInitPill.textContent = t.bannerPill;
+
+      const initDiscBoxes = document.querySelectorAll('#view-initial .disclaimer-box');
+      if (initDiscBoxes.length >= 2) {
+        initDiscBoxes[0].querySelector('div').innerHTML = `${SVG_CLOCK_BW} <span>${t.decorrenzaTitle}</span>`;
+        initDiscBoxes[0].querySelector('p').textContent = t.decorrenzaDesc;
+        
+        initDiscBoxes[1].querySelector('h3').innerHTML = t.legalWarningTitle;
+        initDiscBoxes[1].querySelector('p').textContent = t.legalWarningIntro;
+        const ul = initDiscBoxes[1].querySelector('ul');
+        if (ul && t.legalBullets) {
+          ul.innerHTML = t.legalBullets.map(b => `<li>${b}</li>`).join('');
+        }
+      }
+
+      const initBtn = document.querySelector('#view-initial .button-primary');
+      if (initBtn) initBtn.textContent = t.initialBtn;
+
+      // 2. Main View
+      const mainBadge = document.querySelector('#view-main .app-brand-badge');
+      if (mainBadge) mainBadge.textContent = t.mainBadge;
+      const mainH1 = document.querySelector('#view-main h1');
+      if (mainH1) mainH1.textContent = t.mainTitle;
+      const mainSub = document.querySelector('#view-main .subtitle');
+      if (mainSub) mainSub.textContent = t.mainSubtitle;
+
+      const bannerMainH2 = document.querySelector('#view-main .hero-banner h2');
+      if (bannerMainH2) bannerMainH2.textContent = t.bannerTermsTitle;
+      const bannerMainP = document.querySelector('#view-main .hero-banner p');
+      if (bannerMainP) bannerMainP.textContent = t.bannerTermsDesc;
+      const bannerMainPill = document.querySelector('#view-main .hero-banner .hero-pill');
+      if (bannerMainPill) bannerMainPill.textContent = t.bannerTermsPill;
+
+      // Cards
+      const cardTitles = document.querySelectorAll('.feature-card h3');
+      const cardDescs = document.querySelectorAll('.feature-card p');
+      const cardActions = document.querySelectorAll('.feature-card-action');
+      const cardBadges = document.querySelectorAll('#view-main .feature-card-badge');
+      if (cardBadges.length >= 4 && t.cardBadges) {
+        for (let i = 0; i < 4; i++) {
+          cardBadges[i].textContent = t.cardBadges[i];
+        }
+      }
+
+      if (cardTitles.length >= 4) {
+        cardTitles[0].textContent = t.card1Title;
+        cardTitles[1].textContent = t.card2Title;
+        cardTitles[2].textContent = t.card3Title;
+        cardTitles[3].textContent = t.card4Title;
+      }
+      if (cardDescs.length >= 4) {
+        cardDescs[0].textContent = t.card1Desc;
+        cardDescs[1].textContent = t.card2Desc;
+        cardDescs[2].textContent = t.card3Desc;
+        cardDescs[3].textContent = t.card4Desc;
+      }
+      cardActions.forEach(btn => btn.textContent = t.openSection);
+
+      // Main FAQs
+      const faqH3 = document.querySelector('#view-main > h3');
+      if (faqH3) faqH3.textContent = t.faqSectionTitle;
+
+      const faqs = document.querySelectorAll('#view-main .faq-accordion');
+      faqs.forEach((faqEl, idx) => {
+        if (t.faqs[idx]) {
+          const qSpan = faqEl.querySelector('.faq-question span:first-child');
+          if (qSpan) qSpan.textContent = t.faqs[idx].q;
+          const aDiv = faqEl.querySelector('.faq-answer');
+          if (aDiv) aDiv.innerHTML = t.faqs[idx].a;
+        }
+      });
+
+      const transBox = document.querySelector('#view-main > .disclaimer-box');
+      if (transBox) {
+        const transH3 = transBox.querySelector('h3');
+        if (transH3) transH3.textContent = t.transparencyTitle;
+        const transP = transBox.querySelector('p');
+        if (transP) transP.textContent = t.transparencyDesc;
+      }
+
+      // 3. Requirements View
+      const reqBadge = document.querySelector('#view-requirements .app-brand-badge');
+      if (reqBadge) reqBadge.textContent = t.reqBadge;
+      const reqH1 = document.querySelector('#view-requirements h1');
+      if (reqH1) reqH1.textContent = t.reqTitle;
+      const reqSub = document.querySelector('#view-requirements .subtitle');
+      if (reqSub) reqSub.textContent = t.reqSubtitle;
+
+      const reqLabels = document.querySelectorAll('#view-requirements .form-group > label');
+      if (reqLabels.length >= 3) {
+        reqLabels[0].textContent = t.reqCessationLabel;
+        reqLabels[1].textContent = t.reqWeeksLabel;
+        reqLabels[2].textContent = t.reqDeclLabel;
+      }
+
+      const cessationSelect = document.getElementById('cessation-select');
+      if (cessationSelect && cessationSelect.options.length >= 8) {
+        for (let i = 0; i < 8; i++) {
+          cessationSelect.options[i].text = t.reqCessationOptions[i];
+        }
+      }
+
+      const reqSliderDisplay = document.querySelectorAll('#view-requirements .slider-value-display span');
+      if (reqSliderDisplay.length >= 3) {
+        reqSliderDisplay[0].textContent = t.reqWeeksMin;
+        reqSliderDisplay[2].textContent = t.reqWeeksMax;
+      }
+
+      const reqChkDid = document.querySelector('label[for="check-did"]');
+      if (reqChkDid) reqChkDid.textContent = t.reqDidLabel;
+      const reqChkPension = document.querySelector('label[for="check-no-pension"]');
+      if (reqChkPension) reqChkPension.textContent = t.reqNoPensionLabel;
+
+      updateReqWeeks(document.getElementById('req-weeks-slider').value);
+      runRequirementsSimulation();
+
+      // 4. Amounts View
+      const amountsBadge = document.querySelector('#view-amounts .app-brand-badge');
+      if (amountsBadge) amountsBadge.textContent = t.amountsBadge;
+      const amountsH1 = document.querySelector('#view-amounts h1');
+      if (amountsH1) amountsH1.textContent = t.amountsTitle;
+      const amountsSub = document.querySelector('#view-amounts .subtitle');
+      if (amountsSub) amountsSub.textContent = t.amountsSubtitle;
+      const amountsDisclaimerEl = document.getElementById('amounts-disclaimer-text');
+      if (amountsDisclaimerEl) amountsDisclaimerEl.textContent = t.amountsDisclaimer;
+
+      const amountsLabels = document.querySelectorAll('#view-amounts .form-group > label');
+      if (amountsLabels.length >= 2) {
+        amountsLabels[0].textContent = t.amountsSalaryLabel;
+        amountsLabels[1].textContent = t.amountsWeeksLabel;
+      }
+
+      const amountsHelpSmall = document.querySelectorAll('#view-amounts .form-group small');
+      if (amountsHelpSmall.length >= 2) {
+        amountsHelpSmall[0].textContent = t.amountsSalaryHelp;
+        amountsHelpSmall[1].textContent = t.amountsOver55Help;
+      }
+
+      const amountsSliderDisplay = document.querySelectorAll('#view-amounts .slider-value-display span');
+      if (amountsSliderDisplay.length >= 3) {
+        amountsSliderDisplay[0].textContent = t.amountsWeeksMin;
+        amountsSliderDisplay[2].textContent = t.amountsWeeksMax;
+      }
+
+      const amountsChkOver55 = document.querySelector('label[for="check-over55"]');
+      if (amountsChkOver55) amountsChkOver55.textContent = t.amountsOver55Label;
+
+      const amountsPrincTitle = document.getElementById('amounts-principle-title');
+      if (amountsPrincTitle && t.amountsPrincipleTitle) amountsPrincTitle.textContent = t.amountsPrincipleTitle;
+      const amountsPrincMain = document.getElementById('amounts-principle-main');
+      if (amountsPrincMain && t.amountsPrincipleMain) amountsPrincMain.textContent = t.amountsPrincipleMain;
+      const amountsPrincIntro = document.getElementById('amounts-principle-intro');
+      if (amountsPrincIntro && t.amountsPrincipleIntro) amountsPrincIntro.textContent = t.amountsPrincipleIntro;
+      const amountsPrincLow = document.getElementById('amounts-principle-low');
+      if (amountsPrincLow && t.amountsPrincipleLow) amountsPrincLow.innerHTML = t.amountsPrincipleLow;
+      const amountsPrincHigh = document.getElementById('amounts-principle-high');
+      if (amountsPrincHigh && t.amountsPrincipleHigh) amountsPrincHigh.innerHTML = t.amountsPrincipleHigh;
+      const amountsPrincMax = document.getElementById('amounts-principle-max');
+      if (amountsPrincMax && t.amountsPrincipleMax) amountsPrincMax.innerHTML = t.amountsPrincipleMax;
+
+      updateAmountWeeks(document.getElementById('amount-weeks-slider').value);
+      calculateAmounts();
+
+      // 5. Guide View
+      const guideBadge = document.querySelector('#view-guide .app-brand-badge');
+      if (guideBadge) guideBadge.textContent = t.guideBadge;
+      const guideH1 = document.querySelector('#view-guide h1');
+      if (guideH1) guideH1.textContent = t.guideTitle;
+      const guideSub = document.querySelector('#view-guide .subtitle');
+      if (guideSub) guideSub.textContent = t.guideSubtitle;
+
+      const guideBannerH2 = document.querySelector('#view-guide .hero-banner h2');
+      if (guideBannerH2) guideBannerH2.textContent = t.guideBannerTitle;
+      const guideBannerP = document.querySelector('#view-guide .hero-banner p');
+      if (guideBannerP) guideBannerP.textContent = t.guideBannerDesc;
+      const guideBannerPill = document.querySelector('#view-guide .hero-banner .hero-pill');
+      if (guideBannerPill) guideBannerPill.textContent = t.guideBannerPill;
+
+      const guideDiscBox = document.querySelector('#view-guide .disclaimer-box');
+      if (guideDiscBox) {
+        guideDiscBox.querySelector('div').innerHTML = `${SVG_CLOCK_BW} <span>${t.decorrenzaTitle}</span>`;
+        guideDiscBox.querySelector('p').textContent = t.decorrenzaDesc;
+      }
+
+      const stepCards = document.querySelectorAll('.step-card');
+      stepCards.forEach((card, idx) => {
+        const stepData = t.guideSteps[idx];
+        if (stepData) {
+          const pill = card.querySelector('.step-pill');
+          if (pill) pill.textContent = stepData.phase;
+          const cat = card.querySelector('.step-header span:last-child');
+          if (cat) cat.textContent = stepData.cat;
+          const title = card.querySelector('.step-title');
+          if (title) title.textContent = stepData.title;
+          const desc = card.querySelector('p');
+          if (desc) desc.innerHTML = stepData.desc;
+          const path = card.querySelector('.step-path');
+          if (path && stepData.path) path.textContent = stepData.path;
+          const tips = card.querySelector('.step-tips');
+          if (tips && stepData.tips && stepData.tips.length > 0) {
+            tips.innerHTML = stepData.tips.map(tip => `<li>${tip}</li>`).join('');
+          }
+        }
+      });
+
+      // SIISL box in guide
+      const siislBox = document.getElementById('guide-siisl-box') || document.querySelector('#view-guide .disclaimer-box[style*="#DEE9E1"]');
+      if (siislBox) {
+        const sBadge = siislBox.querySelector('.feature-card-badge');
+        if (sBadge) sBadge.textContent = t.siislBadge;
+        const sPlat = siislBox.querySelector('div span:last-child');
+        if (sPlat) sPlat.textContent = t.siislPlatform;
+        const sTitle = siislBox.querySelector('h3');
+        if (sTitle) sTitle.textContent = t.siislTitle;
+        const sContent = siislBox.querySelector('div[style*="font-size: 0.92rem"]');
+        if (sContent) sContent.innerHTML = t.siislContent;
+      }
+
+      // 6. Documents View
+      const docsBadge = document.querySelector('#view-documents .app-brand-badge');
+      if (docsBadge) docsBadge.textContent = t.docsBadge;
+      const docsH1 = document.querySelector('#view-documents h1');
+      if (docsH1) docsH1.textContent = t.docsTitle;
+      const docsSub = document.querySelector('#view-documents .subtitle');
+      if (docsSub) docsSub.textContent = t.docsSubtitle;
+
+      const filterBtns = document.querySelectorAll('.filter-btn');
+      if (filterBtns.length >= 3) {
+        filterBtns[0].textContent = t.docsFilterAll;
+        filterBtns[1].textContent = t.docsFilterMandatory;
+        filterBtns[2].textContent = t.docsFilterMissing;
+      }
+
+      // Back buttons across sub-views
+      document.querySelectorAll('.view-page .button-secondary').forEach(b => {
+        b.textContent = t.backBtn;
+      });
+      document.querySelectorAll('.view-page .button-primary').forEach(b => {
+        if (b.textContent.includes('Torna al Menu') || b.textContent.includes('Back to Main Menu')) {
+          b.textContent = t.backToMenu;
+        }
+      });
+
+      // PDF Download Cards (Centered)
+      document.querySelectorAll('.pdf-download-card').forEach(card => {
+        const badge = card.querySelector('.pdf-badge-row span:first-child');
+        if (badge) badge.textContent = t.pdfBadge;
+        const pages = card.querySelector('.pdf-badge-row span:last-child');
+        if (pages) pages.textContent = t.pdfPages;
+        const h2 = card.querySelector('h2');
+        if (h2) h2.textContent = t.pdfTitle;
+        const p = card.querySelector('p');
+        if (p) p.textContent = t.pdfDesc;
+        const btnSpan = card.querySelector('.button-primary span');
+        if (btnSpan) btnSpan.textContent = t.pdfBtn;
+      });
+
+      // Ad Banners Text
+      document.querySelectorAll('.ad-banner-label').forEach(lbl => {
+        lbl.textContent = t.adNotice;
+      });
+      document.querySelectorAll('.ad-banner-content span').forEach(sp => {
+        sp.textContent = t.adBannerPlaceholder;
+      });
+
+      // Rewarded Video Modal Strings
+      const modalBadge = document.getElementById('video-ad-modal-badge');
+      if (modalBadge) modalBadge.textContent = t.videoAdBadge;
+      const modalTitle = document.getElementById('video-ad-modal-title');
+      if (modalTitle) modalTitle.textContent = t.videoAdTitle;
+      const modalDesc = document.getElementById('video-ad-modal-desc');
+      if (modalDesc) modalDesc.textContent = t.videoAdDesc;
+      const sponsorLabel = document.getElementById('video-mock-sponsor-label');
+      if (sponsorLabel) sponsorLabel.textContent = t.videoAdSponsor;
+      const skipBtn = document.getElementById('video-ad-skip-btn');
+      if (skipBtn) skipBtn.textContent = t.videoAdSkip;
+      const unlockedBadge = document.getElementById('video-ad-unlocked-badge');
+      if (unlockedBadge) unlockedBadge.textContent = t.videoAdUnlocked;
+      const dlBtnSpan = document.querySelector('#video-ad-download-btn span');
+      if (dlBtnSpan) dlBtnSpan.textContent = t.videoAdDownloadBtn;
+
+      // Footer & Policy Link
+      const footerDivs = document.querySelectorAll('footer .footer-info-row div');
+      if (footerDivs.length >= 2) {
+        footerDivs[0].textContent = t.footerLine1;
+        footerDivs[1].textContent = t.footerLine2;
+      }
+      const footerPolicyLink = document.getElementById('footer-policy-link');
+      if (footerPolicyLink) footerPolicyLink.textContent = t.footerPolicyLink;
+
+      // Policy Modal Content
+      renderPolicyModalContent();
+
+      // Reopen card on initial screen
+      const rTitle = document.getElementById('reopen-card-title');
+      if (rTitle) rTitle.textContent = t.reopenPolicyCardTitle;
+      const rSub = document.getElementById('reopen-card-sub');
+      if (rSub) rSub.textContent = t.reopenPolicyCardSub;
+      const rBtn = document.getElementById('reopen-card-btn');
+      if (rBtn) rBtn.textContent = t.reopenPolicyCardBtn;
+      document.querySelectorAll('.initial-policy-close-btn').forEach(btn => {
+        btn.textContent = t.initialCloseBtnText;
+      });
+
+      // Fixed disclaimer banner on every page
+      const bTitle = document.getElementById('banner-fixed-title');
+      if (bTitle) bTitle.textContent = t.bannerFixedTitle;
+      const bSub = document.getElementById('banner-fixed-sub');
+      if (bSub) bSub.textContent = t.bannerFixedSub;
+      const b1 = document.getElementById('banner-fixed-b1');
+      if (b1) b1.innerHTML = `<strong>${t.bannerFixedB1}</strong>`;
+      const b2 = document.getElementById('banner-fixed-b2');
+      if (b2) b2.innerHTML = `<strong>${t.bannerFixedB2}</strong>`;
+      const b3 = document.getElementById('banner-fixed-b3');
+      if (b3) b3.innerHTML = `<strong>${t.bannerFixedB3}</strong>`;
+      const b4 = document.getElementById('banner-fixed-b4');
+      if (b4) b4.innerHTML = `<strong>${t.bannerFixedB4}</strong>`;
+
+      // Re-render documents with translated titles and status badges
+      renderDocs();
+    }
+
+    // Policy & Terms Modal and Collapsible Management
+    function renderPolicyModalContent() {
+      const t = translationsDict[currentAppLanguage] || translationsDict.IT;
+      const modalPolicyHeaderTitle = document.getElementById('modal-policy-header-title');
+      if (modalPolicyHeaderTitle) modalPolicyHeaderTitle.textContent = t.modalPolicyHeader || 'Condizioni di Utilizzo, Privacy & Trasparenza';
+      const modalPolicyCloseBtn = document.getElementById('modal-policy-close-btn');
+      if (modalPolicyCloseBtn) modalPolicyCloseBtn.textContent = t.modalPolicyCloseBtn || 'Ho Letto e Compreso • Chiudi Finestra';
+
+      const modalPolicyBody = document.getElementById('modal-policy-body');
+      if (modalPolicyBody) {
+        modalPolicyBody.innerHTML = `
+          <h3 style="color: var(--accent-error); font-size: 1.05rem; margin-top: 0; margin-bottom: 8px;">${t.legalWarningTitle}</h3>
+          <p style="margin-bottom: 12px; font-size: 0.88rem; line-height: 1.5; color: var(--text-main);">${t.legalWarningIntro}</p>
+          <ul style="margin: 10px 0 14px 18px; line-height: 1.6; font-size: 0.86rem; color: var(--text-main);">
+            ${t.legalBullets.map(b => `<li style="margin-bottom: 8px;">${b}</li>`).join('')}
+          </ul>
+        `;
+      }
+    }
+
+    function openPolicyModal() {
+      renderPolicyModalContent();
+      const modal = document.getElementById('policy-modal');
+      if (modal) {
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
+    }
+
+    function closePolicyModal() {
+      const modal = document.getElementById('policy-modal');
+      if (modal) {
+        modal.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+    }
+
+    function toggleInitialPolicy(show) {
+      const box = document.getElementById('initial-policy-box');
+      const reopen = document.getElementById('initial-policy-reopen-card');
+      if (box && reopen) {
+        if (show) {
+          box.style.display = 'block';
+          reopen.style.display = 'none';
+        } else {
+          box.style.display = 'none';
+          reopen.style.display = 'flex';
+        }
+      }
+    }
+
+    // Rewarded Video Ad Logic (PDF Download Protection)
+    let videoAdInterval = null;
+    let videoAdSeconds = 5;
+
+    function openRewardedPdfAd() {
+      const modal = document.getElementById('ad-video-modal');
+      const timerSection = document.getElementById('video-ad-timer-section');
+      const unlockedSection = document.getElementById('video-ad-unlocked-section');
+      const progressFill = document.getElementById('video-ad-progress-fill');
+      const countdownText = document.getElementById('video-ad-countdown-text');
+      const playIcon = document.getElementById('video-mock-play-icon');
+
+      if (!modal) return;
+      modal.classList.add('active');
+      timerSection.style.display = 'block';
+      unlockedSection.style.display = 'none';
+
+      videoAdSeconds = 5;
+      progressFill.style.width = '0%';
+      const t = translationsDict[currentAppLanguage] || translationsDict.IT;
+      countdownText.textContent = (t.videoAdUnlockIn || 'Sblocco risorsa tra: ') + videoAdSeconds + 's';
+
+      if (playIcon) {
+        playIcon.innerHTML = `<svg width="24" height="24" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg>`;
+      }
+
+      clearInterval(videoAdInterval);
+      videoAdInterval = setInterval(() => {
+        videoAdSeconds--;
+        const percentage = ((5 - videoAdSeconds) / 5) * 100;
+        progressFill.style.width = percentage + '%';
+
+        if (videoAdSeconds > 0) {
+          countdownText.textContent = (t.videoAdUnlockIn || 'Sblocco risorsa tra: ') + videoAdSeconds + 's';
+        } else {
+          clearInterval(videoAdInterval);
+          timerSection.style.display = 'none';
+          unlockedSection.style.display = 'block';
+
+          if (playIcon) {
+            playIcon.innerHTML = `<svg width="24" height="24" viewBox="0 0 24 24" fill="#2ECC71"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>`;
+          }
+
+          // Trigger download automatico
+          const downloadLink = document.createElement('a');
+          downloadLink.href = '/guidanaspicompilazione2026.pdf';
+          downloadLink.download = 'guidanaspicompilazione2026.pdf';
+          downloadLink.target = '_blank';
+          document.body.appendChild(downloadLink);
+          downloadLink.click();
+          document.body.removeChild(downloadLink);
+        }
+      }, 1000);
+    }
+
+    function closeRewardedPdfAd() {
+      clearInterval(videoAdInterval);
+      const modal = document.getElementById('ad-video-modal');
+      if (modal) {
+        modal.classList.remove('active');
+      }
+    }
+
+    function getActiveDocsData() {
+      return currentAppLanguage === 'EN' ? documentsDataEn : documentsData;
+    }
+
+    // Init on page load
+    window.addEventListener('DOMContentLoaded', () => {
+      renderPolicyModalContent();
+      runRequirementsSimulation();
+      calculateAmounts();
+      renderDocs();
+
+      const policyModal = document.getElementById('policy-modal');
+      if (policyModal) {
+        policyModal.addEventListener('click', (e) => {
+          if (e.target === policyModal) {
+            closePolicyModal();
+          }
+        });
+      }
+
+      const videoModal = document.getElementById('ad-video-modal');
+      if (videoModal) {
+        videoModal.addEventListener('click', (e) => {
+          if (e.target === videoModal) {
+            closeRewardedPdfAd();
+          }
+        });
+      }
+    });
+  </script>
+</body>
+</html>

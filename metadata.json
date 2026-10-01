@@ -1,0 +1,7 @@
+{
+  "name": "Guida NASpI",
+  "description": "Assistente per la domanda di disoccupazione NASpI: calcolo importo lordo e netto, simulatore durata settimane, verifica requisiti disoccupazione involontaria, guida passo-passo portale INPS con SPID/CIE, manuale PDF 23 pagine scaricabile e checklist documenti conformi ai parametri 2026.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
+
